@@ -7,6 +7,7 @@ class PostUpdateForm(forms.ModelForm):
     content = forms.CharField(required=False)
     username = forms.CharField(required=False)
     password = forms.CharField(required=False)
+    deleteFile = forms.BooleanField(required=False)  
     
     class Meta:
         model = Posts
