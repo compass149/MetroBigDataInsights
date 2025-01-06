@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Posts
 
 from django.contrib import messages
+from django.core.paginator import Paginator
+from django.db.models import Q
+
 from .form import PostCreateForm
 from .form2 import PostUpdateForm
 
@@ -75,5 +78,49 @@ def delete_post(request, post_id):
 # def get_posts(request):
 #     return HttpResponse('게시글 목록')
 def get_posts(request):
+#    posts = Posts.objects.all().order_by('-created_at')
+#    return render(request, 'posts/list.html', {'posts': posts})\
+    page = request.GET.get('page', '1')
     posts = Posts.objects.all().order_by('-created_at')
-    return render(request, 'posts/list.html', {'posts': posts})
+    
+    searchType = request.GET.get('searchType')
+    searchKeyword = request.GET.get('searchKeyword')
+    
+    #검색 조건 처리
+    if searchType not in [None, ''] and searchKeyword not in [None, '']:
+        if searchType == 'all':
+            posts = posts.filter(
+                Q(title__contains=searchKeyword) |
+                Q(content__contains=searchKeyword) |
+                Q(username__contains=searchKeyword)
+            )
+        elif searchType == 'title':
+            posts = posts.filter(
+                Q(title__contains=searchKeyword)
+            )
+        elif searchType == 'content':
+            posts = posts.filter(
+                Q(content__contains=searchKeyword)
+            )
+        elif searchType == 'username':
+            posts = posts.filter(
+                Q(username__contains=searchKeyword)
+            )
+    
+    #페이지네이션
+    paginator = Paginator(posts, 10)
+    page_obj = paginator.get_page(page)
+    
+    # 현재 페이지의 첫 번째 게시글 번호 계산
+    start_index = paginator.count - (paginator.per_page * (page_obj.number - 1))
+
+    # 순번 계산하여 게시글 리스트에 추가
+    for index, _ in enumerate(page_obj, start=0):
+        page_obj[index].index_number = start_index - index
+
+    #return render(request, 'posts/list.html', {'posts': page_obj})
+    return render (request, 'posts/list.html', {
+        'posts' : page_obj,
+        'searchType':searchType,
+        'searchKeyword' : searchKeyword
+    })
