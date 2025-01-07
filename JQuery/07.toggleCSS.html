@@ -1,0 +1,23 @@
+<head>
+    <script src="http://code.jQuery.com/jQuery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("button").click(function() {
+                $("h1, h2, p, div").toggleClass("red");
+            });
+        });
+    </script>
+    <style>
+        .red {
+            color: rgb(207, 107, 107);
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML5</h1>
+    <h2>CSS3</h2>
+    <p>자바스크립트</p>
+    <div>제이쿼리</div><br>
+    <button>CSS 적용/해제</button>
+</body>

@@ -1,0 +1,18 @@
+<head>
+    <script src="http://code.jQuery.com/jQuery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $("p").hide();
+            });
+            $("button.show").click(function () {
+                $("p").show();
+            });
+        });
+    </script>
+</head>
+<body>
+    <p>메시지 : 글 숨기기 / 삭제</p>
+    <button class="hide">메지시 삭제</button>
+    <button class="show">메지시 보기</button>
+</body>

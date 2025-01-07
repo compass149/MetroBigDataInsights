@@ -1,0 +1,35 @@
+<head>
+    <script src="http://code.jQuery.com/jQuery-3.7.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+         var xWidth=100;
+            var yHeight=100;
+            $("div").click(function () {
+                $(this).width(xWidth).addClass("box");
+                $(this).height(yHeight).addClass("box");
+                xWidth=xWidth-10; 
+                yHeight=yHeight-10;
+            });
+        });
+    </script>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            float: left;
+            margin: 5px;
+            background: rgb(153, 153, 9);
+        }
+        .box { 
+            background: rgb(208, 125, 125); 
+        }
+    </style> 
+</head>
+<body>
+    <div>박스1</div>
+    <div>박스2</div>
+    <div>박스3</div>
+    <div>박스4</div>
+    <div>박스5</div>
+</body>
