@@ -31,9 +31,9 @@ def create_post(request):
             post.password = make_password(form.cleaned_data['password'])
             post.save()
             #파일 업로드
-            if request.FILES['uploadFile']:
+            if request.FILES.get('uploadFile'):
                 filename = uuid.uuid4().hex
-                file = request.FILES['uploadFile']
+                file = request.FILES.get('uploadFile')
                 
                 #파일 저장 경로
                 file_path = os.path.join(settings.MEDIA_ROOT, 'posts', str(post.id), str(filename))
@@ -67,52 +67,51 @@ def get_post(request, post_id):
 #     return HttpResponse('게시글 수정')
 def update_post(request, post_id):
     post = get_object_or_404(Posts, id=post_id)
-    original_password = post.password
+    post_password = post.password
     form = PostUpdateForm(instance=post)
 
     if request.method == 'POST':
-        form = PostUpdateForm(request.POST, instance=post)
+        form = PostUpdateForm(request.POST, request.FILES, instance=post)
         
         if form.is_valid():
             # 비밀번호 확인
-            if check_password(form.cleaned_data['password'], original_password):
+            if check_password(form.cleaned_data['password'], post_password):
                 # 게시글 정보 업데이트
                 post = form.save(commit=False)
                 post.password = make_password(form.cleaned_data['password'])
-                post.save()
-
+                
                 # (선택) 체크박스 'deleteFile'로 파일 삭제
                 if form.cleaned_data.get('deleteFile'):
                     if post.filename:
-                        file_path = os.path.join(settings.MEDIA_ROOT, 'posts', str(post.id), post.filename)
+                        file_path = os.path.join(settings.MEDIA_ROOT, 'posts', str(post.id), str(post.filename))
                         if os.path.exists(file_path):
                             os.remove(file_path)
+                            
                         post.filename = None
                         post.original_filename = None
-                        post.save()
-
-                # 새 파일 업로드
-                file = request.FILES.get('uploadFile', None)
-                if file:
+                # 새 파일 업로드 확인
+                new_file = request.FILES.get('uploadFile')  # <-- 안전하게 가져오기
+                if new_file:
                     # 기존 파일이 있다면 미리 삭제
                     if post.filename:
-                        old_file_path = os.path.join(settings.MEDIA_ROOT, 'posts', str(post.id), post.filename)
+                        old_file_path = os.path.join(settings.MEDIA_ROOT, 'posts', str(post.id), str(post.filename))
                         if os.path.exists(old_file_path):
                             os.remove(old_file_path)
 
                     # 새 파일 저장
                     filename = uuid.uuid4().hex
-                    new_file_path = os.path.join(settings.MEDIA_ROOT, 'posts', str(post.id), filename)
-                    if not os.path.exists(os.path.dirname(new_file_path)):
-                        os.makedirs(os.path.dirname(new_file_path))
+                    file_path = os.path.join(settings.MEDIA_ROOT, 'posts', str(post.id), filename)
+                    
+                    if not os.path.exists(os.path.dirname(file_path)):
+                        os.makedirs(os.path.dirname(file_path))
 
-                    with open(new_file_path, 'wb') as f:
-                        for chunk in file.chunks():
+                    with open(file_path, 'wb') as f:
+                        for chunk in new_file.chunks():
                             f.write(chunk)
 
                     post.filename = filename
-                    post.original_filename = file.name
-                    post.save()
+                    post.original_filename = new_file.name
+                post.save()
 
                 messages.success(request, '게시글이 수정되었습니다.')
                 return redirect("posts:read", post_id=post.id)
@@ -135,12 +134,6 @@ def delete_post(request, post_id):
     
     if request.method == 'POST':
         if check_password(password, post.password):
-            #파일 삭제
-            if post.filename:
-                file_path = os.path.join(settings.MEDIA_ROOT, 'posts', str(post.id), str(post.filename))
-                if os.path.exists(file_path):
-                    os.remove(file_path)
-                    
             post.delete()
             messages.success(request, '게시글이 삭제되었습니다.')
             return redirect('posts:list')
