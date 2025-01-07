@@ -38,9 +38,21 @@
                     </ul>
                     <div class="d-flex">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="#">로그인</a>
+                                <a class="nav-link" href="{% url 'auth:profile' %}">{{ user.first_name }} ({{ user.username }})</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'auth:logout' %}">로그아웃</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'auth:login' %}">로그인</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'auth:register' %}">회원가입</a>
+                            </li>
+                        {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -87,7 +99,7 @@
 
     <!-- tinymce -->
     <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
-    
+
     <!-- STATIC JS -->
     <script src="{% static 'script.js' %}"></script>
     <script>
