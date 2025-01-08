@@ -34,7 +34,7 @@
                         </div>
                         {% endif %}
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="username" class="form-label">
                             글쓴이 <span class="text-danger">*</span>
                         </label>
@@ -54,7 +54,7 @@
                             {{ form.password.errors.0 }}
                         </div>
                         {% endif %}
-                    </div>
+                    </div> -->
                     <div>
                         <label for="uploadFile" class="form-label">첨부 파일</label>
                         <input type="file" class="form-control" id="uploadFile" name="uploadFile" accept="image/*">
@@ -154,21 +154,21 @@
                     minlength:2,
                     maxlength:100
                 },
-                content:{
-                    required : true,
-                    minlength:2,
-                    maxlength:1000
-                },
-                username:{
-                    required : true,
-                    minlength:2,
-                    maxlength:10
-                },
-                password:{
-                    required : true,
-                    minlength:4,
-                    maxlength:20
-                }
+                // content:{
+                //     required : true,
+                //     minlength:2,
+                //     maxlength:1000
+                // },
+                // username:{
+                //     required : true,
+                //     minlength:2,
+                //     maxlength:10
+                // },
+                // password:{
+                //     required : true,
+                //     minlength:4,
+                //     maxlength:20
+                // }
             },
             messages:{
                 title:{
@@ -176,21 +176,21 @@
                     minlength :'제목은 최소 2자 이상 입력하세요',
                     maxlength:'제목은 최대 100자 이하로 입력하세요.'
                 },
-                content:{
-                    required:'내용을 입력하세요.',
-                    minlength :'내용은 최소 2자 이상 입력하세요',
-                    maxlength:'내용은 최대 1000자 이하로 입력하세요.'
-                },
-                password:{
-                    required:'비밀번호를 입력하세요.',
-                    minlength :'비밀번호는 최소 2자 이상 입력하세요',
-                    maxlength:'비밀번호는 최대 100자 이하로 입력하세요.'
-                },
-                username:{
-                    required:'작성자를 입력하세요.',
-                    minlength :'작성자는 최소 2자 이상 입력하세요',
-                    maxlength:'작성자는 최대 100자 이하로 입력하세요.'
-                }
+                // content:{
+                //     required:'내용을 입력하세요.',
+                //     minlength :'내용은 최소 2자 이상 입력하세요',
+                //     maxlength:'내용은 최대 1000자 이하로 입력하세요.'
+                // },
+                // password:{
+                //     required:'비밀번호를 입력하세요.',
+                //     minlength :'비밀번호는 최소 2자 이상 입력하세요',
+                //     maxlength:'비밀번호는 최대 100자 이하로 입력하세요.'
+                // },
+                // username:{
+                //     required:'작성자를 입력하세요.',
+                //     minlength :'작성자는 최소 2자 이상 입력하세요',
+                //     maxlength:'작성자는 최대 100자 이하로 입력하세요.'
+                // }
             },
             errorClass : 'is-invalid',
             validClass :'is-valid',

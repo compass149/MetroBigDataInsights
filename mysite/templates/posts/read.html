@@ -10,7 +10,7 @@
             </h5>
             <div class="card-body">
                 <div class="mb-3 text-muted">
-                    글쓴이 : {{ post.username }} |
+                    글쓴이 : {{ post.created_by.first_name }} |
                     등록일시 : {{ post.created_at | date:"Y-m-d H:i" }} |
                     수정일시 : {{ post.updated_at | date:"Y-m-d H:i" }}
                 </div>
@@ -29,9 +29,11 @@
         </div>
         <div>
             <a href="{% url 'posts:list' %}" class="btn btn-primary">목록</a>
+            {% if post.created_by == request.user %}
             <a href="{% url 'posts:update' post_id=post.id %}" class="btn btn-warning">수정</a>
             <button type="button" class="btn btn-danger"
                     data-bs-toggle="modal" data-bs-target="#deleteModal">삭제</button>
+            {% endif %}
         </div>
 
     </div>
