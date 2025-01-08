@@ -6,7 +6,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 
-from .forms import RegisterForm, LoginForm, ProfileUpdateForm
+from .forms import AccountDeleteForm, RegisterForm, LoginForm, ProfileUpdateForm,PasswordUpdateForm,UsernameFindForm,PasswordResetForm
+
+import random
+import string
 
 # 회원가입
 # def register_account(request):
@@ -88,7 +91,7 @@ def get_profile(request):
 
 #프로필 수정
 @login_required(login_url='auth:login')
-def update_account(request):
+def update_profile(request):
     form = ProfileUpdateForm(instance=request.user)
     
     if request.method == 'POST':
@@ -106,17 +109,113 @@ def update_account(request):
                 {'form': form, 'message_class': 'col-4 mx-auto'})
     
 # 비밀번호 수정
+@login_required(login_url='auth:login')
 def update_password(request):
-    return HttpResponse ('비밀번호 수정')
+    form = PasswordUpdateForm()
+    
+    if request.method == 'POST':
+        form = PasswordUpdateForm(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['password']
+            password1=form.cleaned_data['password1']
+            
+            user = authenticate(request, username=request.user.username, password=password)
+            if user is None:
+                messages.success(request, '기존 비밀번호가 일치하지 않습니다.')
+                return redirect('auth:update_password')
+            
+            user = request.user
+            user.set_password(password1)
+            user.save()
+            
+            logout(request)
+            messages.success(request, '비밀번호 수정이 완료되었습니다. 다시 로그인해주세요.')
+            return redirect('auth:login')
+        else:
+            messages.error(request, '비밀번호 수정에 실패했습니다.')
+            
+    return render(request, 'accounts/update_password.html',
+                {'form': form, 'message_class': 'col-4 mx-auto'})
+    
 
 # 아이디 찾기
 def find_username(request):
-    return HttpResponse ('아이디 찾기')
+    if request.user.is_authenticated:
+        return redirect('auth:profile')
+    
+    form = UsernameFindForm
+    
+    if request.method == 'POST':
+        form = UsernameFindForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            email = form.cleaned_data['email']
+            user = User.objects.filter(first_name=first_name, email=email).first()
+            if user:
+                messages.success(request, f'아이디는 {user.username}입니다.')
+                return redirect('auth:login')
+            else:
+                messages.error(request, '아이디 찾기에 실패했습니다.')
+        else:
+            messages.error(request, '아이디 찾기에 실패했습니다.')
+            
+    return render(request, 'accounts/find_username.html',
+                {'form': form, 'message_class': 'col-4 mx-auto'})
 
 # 비밀번호 초기화
+# def reset_password(request):
+#     return HttpResponse ('비밀번호 초기화')
 def reset_password(request):
-    return HttpResponse ('비밀번호 초기화')
+    if request.user.is_authenticated:
+        return redirect('auth:profile')
+    
+    form = PasswordResetForm()
+    
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            email = form.cleaned_data['email']
+            username = form.cleaned_data['username']
+            user = User.objects.filter(first_name=first_name,username=username, email=email).first()
+            if user:
+                password = ''.join(random.choices(string.ascii_letters + string.digits, k =10))
+                user.set_password(password)
+                user.save()
+                
+                messages.success(request, f'비밀번호가 초기화되었습니다. 새로운 비밀번호는 {password}입니다.')
+                return redirect('auth:login')
+            else:
+                messages.error(request, '비밀번호 초기화에 실패했습니다.')
+            
+    return render(request, 'accounts/reset_password.html',
+                {'form': form, 'message_class': 'col-4 mx-auto'})
+
 
 #사용자 탈퇴
+# def delete_account(request):
+#     return HttpResponse ('사용자 탈퇴')
+@login_required(login_url='auth:login')
 def delete_account(request):
-    return HttpResponse ('사용자 탈퇴')
+    form = AccountDeleteForm()
+
+    if request.method == 'POST':
+        form = AccountDeleteForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            email = form.cleaned_data['email']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            user = User.objects.filter(first_name=first_name, username=username, email=email).first()
+            authenticated = authenticate(request, username=username, password=password)
+
+            if user and authenticated is not None:
+                user.delete()
+                logout(request)
+                messages.success(request, '회원탈퇴가 완료되었습니다.')
+                return redirect('auth:login')
+            else:
+                messages.error(request, '회원탈퇴에 실패했습니다. 입력정보를 확인하세요.')
+
+    return render(request, 'accounts/delete_account.html', {'form': form, 'message_class': 'col-4 mx-auto'})
