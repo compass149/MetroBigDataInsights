@@ -20,7 +20,7 @@
     <div class="container">
         <!-- 네비게이션 -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <dvi class="container">
+            <div class="container">
                 <a class="navbar-brand" href="#">프로젝트</a>
                 <button class="navbar-toggler collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -94,8 +94,9 @@
     <!-- JQUERY -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <!-- jquery validation -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validation.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods..min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+    <!-- <script src="https://cdn.jsdeli`vr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script> -->
 
     <!-- tinymce -->
     <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
@@ -103,7 +104,17 @@
     <!-- STATIC JS -->
     <script src="{% static 'script.js' %}"></script>
     <script>
-        /*자바스크립트*/
+        $(document).ready(function(){
+            //모든 ajax 요청에 대한 CSRF 토큰을 자동으로 포함
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings){
+                    if (!this.crossDomain){
+                        xhr.setRequestHeader("X-CSRFToken",
+                            document.querySelector('[name=csrfmiddlewaretoken]').value);
+                    }
+                }
+            });
+        });
     </script>
     {% block script %} {% endblock %}
 </body>

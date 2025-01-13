@@ -19,6 +19,8 @@ from .models import Posts
 from .form import PostCreateForm
 from .form2 import PostUpdateForm
 
+from comments.models import Comments
+
 #게시글 등록
 # def create_post(request):
 #     return HttpResponse('게시글 등록')
@@ -65,7 +67,9 @@ def create_post(request):
 @login_required(login_url='auth:login')
 def get_post(request, post_id):
     post = get_object_or_404(Posts, id= post_id)
-    return render(request, 'posts/read.html', {'post':post})
+    # return render(request, 'posts/read.html', {'post':post})
+    comments = Comments.objects.filter(post=post_id).order_by('-created_at')
+    return render (request, 'posts/read.html', {'post':post, 'comments':comments})
 
 #게시글 수정
 # def update_post(request, post_id):
