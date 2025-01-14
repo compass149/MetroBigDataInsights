@@ -161,7 +161,7 @@
                     type:'POST',
                     data:{
                         'post_id': {{ post.id }},
-                        'content': $('#content').val()
+                        'content': $('#content').val(),
                     },
                     success: function(response){
                         if (response.result == 'success'){
@@ -186,12 +186,6 @@
                         } else {
                             alert(response.message);
                         }
-                    },
-                    error: function(error){
-                        console.error('에러 발생:', error);
-                        alert('댓글 등록 중 오류가 발생했습니다.');
-                    }
-                });
             }
         });
 
@@ -200,7 +194,7 @@
             $('#commentCreateRow').addClass('d-none');
             $('#commentListRow').addClass('d-none');
             $('#commentUpdateRow').removeClass('d-none');
-            $('#updateContent').val(
+            $('#updateContent').val('').val(
                 $(this).closest('.card').find('.card-body').html().trim().replace(/<br\s*\/?>/gi, '\n')
             );
             comment_id = $(this).closest('.card').data('comment-id');
@@ -237,12 +231,12 @@
             },
             submitHandler: function(form) {
                 $.ajax({
-    url: "{% url 'comments:update' comment_id=comment_id %}",
+    url: "{% url 'comments:update' comment_id=0 %}",
     type: "POST",
     data: {
-        'post_id': post_id,
+        'post_id': {{ post_id }},
         'comment_id': comment_id,
-        'content': $('#updateContent').val()
+        'content': $('#updateContent').val(),
     },
     success: function(response) {
         if (response.result == 'success') {
@@ -254,12 +248,15 @@
                 html += '<div class="card mb-3" data-comment-id="' + comment.id + '">';
                 html += '<div class="card-body">' + comment.content.replace(/\n/g, '<br>') + '</div>';
                 html += '<div class="card-footer text-muted">';
-                html += '작성자: ' + comment.created_by + ' | 등록일: ' + comment.created_at;
-                html += ' | 수정일: ' + comment.updated_at;
+                html += '작성자: ' + comment.created_by;
+                html += ' | 등록일시: ' + comment.created_at;
+                html += ' | 수정일시: ' + comment.updated_at;
                 html += '<div class="float-end">';
                 html += '<a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>';
                 html += '<button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>';
-                html += '</div></div></div>';
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
             }
 
             $('#commentList').html(html);
@@ -272,10 +269,5 @@
         }
     }
 });
-
-                });
-            }
-        });
-    });
 </script>
 {% endblock %}

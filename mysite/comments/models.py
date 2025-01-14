@@ -10,7 +10,7 @@ class Comments(models.Model):
     content = models.TextField(verbose_name="내용")
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="작성자",
                                     null=True, blank=True, related_name="comments_created_by")
-    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="수성자",
+    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="수정자",
                                     null=True, blank=True, related_name="comments_updated_by")
     created_at = models.DateTimeField(verbose_name="작성일시", auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="수정일시", auto_now=True)
