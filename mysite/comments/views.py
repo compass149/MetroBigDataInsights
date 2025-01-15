@@ -99,5 +99,39 @@ def update_comment(request, comment_id):
         return JsonResponse({'result': 'success', 'comments': comments})
 
 #댓글 삭제
+
 def delete_comment(request, comment_id):
-    return JsonResponse({'message':'댓글 삭제'})
+    if not request.user.is_authenticated:
+        return JsonResponse({'result': 'error', 'message': 'You are not logged in.'})
+    
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        if not post_id:
+            return JsonResponse({'result': 'error', 'message': '유효하지 않은 게시글 번호입니다.'})
+        
+        post = Posts.objects.get(id=post_id)
+        if not post:
+            return JsonResponse({'result': 'error', 'message': '게시글을 찾을 수 없습니다.'})
+        
+        #content = request.POST.get('content')
+        #if not content:
+        #    return JsonResponse({'result': 'error', 'message': 'Content is required.'})
+                
+        comment_id = request.POST.get('comment_id')
+        if not comment_id:
+            return JsonResponse({'result': 'error', 'message': '유효하지 않은 댓글입니다..'})
+        
+        comment = Comments.objects.get(id=comment_id)
+        if not comment:
+            return JsonResponse({'result': 'error', 'message': '댓글을 찾을 수 없습니다.'})
+        
+        if comment.created_by != request.user:
+            return JsonResponse({'result': 'error', 'message': '댓글을 삭제할 권한이 없습니다.'})
+        
+        # delete comment
+        comment.delete()
+
+        # comment list
+        comments = get_comments(post_id)
+
+        return JsonResponse({'result': 'success', 'comments': comments})

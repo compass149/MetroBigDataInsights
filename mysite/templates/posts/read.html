@@ -1,18 +1,17 @@
-{% extends "../base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <!-- 게시글 보기 -->
         <div class="card mb-3">
             <h5 class="card-header text-primary">
                 <strong>{{ post.title }}</strong>
             </h5>
             <div class="card-body">
                 <div class="mb-3 text-muted">
-                    글쓴이 : {{ post.created_by.first_name }} |
-                    등록일시 : {{ post.created_at | date:"Y-m-d H:i" }} |
-                    수정일시 : {{ post.updated_at | date:"Y-m-d H:i" }}
+                    작성자 : {{ post.created_by.first_name }} |
+                    작성일 : {{ post.created_at | date:"Y-m-d H:i" }} |
+                    수정일 : {{ post.updated_at | date:"Y-m-d H:i" }}
                 </div>
 
                 {% if post.filename %}
@@ -31,149 +30,185 @@
             <a href="{% url 'posts:list' %}" class="btn btn-primary">목록</a>
             {% if post.created_by == request.user %}
             <a href="{% url 'posts:update' post_id=post.id %}" class="btn btn-warning">수정</a>
-            <button type="button" class="btn btn-danger"
-                    data-bs-toggle="modal" data-bs-target="#deleteModal">삭제</button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                data-bs-target="#deleteModal">삭제</button>
             {% endif %}
         </div>
+        <!-- Read -->
     </div>
 </div>
 
+<!-- comment template -->
 <div class="row mt-3" id="commentCreateRow">
     <div class="col-12">
-        <!-- 댓글 등록 -->
+        <!-- comment create -->
         <form id="commentCreateForm">
-            {% csrf_token %}
             <div class="mb-3">
-                <textarea id="content" name="content" class="form-control" placeholder="댓글을 입력하세요." rows="5"></textarea>
+                <textarea id="content" name="content" class="form-control" placeholder="댓글 내용" rows="5"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">댓글 등록</button>
-            <button type="button" class="btn btn-secondary" id="commentCreateCancel">등록 취소</button>
+            <button type="submit" class="btn btn-primary">댓글 작성</button>
+            <buttont type="button" class="btn btn-secondary" id="commentCreateCancel">취소</button>
         </form>
-        <!-- //댓글 등록 -->
+        <!-- comment create -->
     </div>
 </div>
 
 <div class="row mt-3 d-none" id="commentUpdateRow">
     <div class="col-12">
-        <!-- 댓글 수정 -->
-        <form id="commentUpdateForm">
+        <!-- comment update -->
+         <form id ="commentUpdateForm">
             <div class="mb-3">
-                <textarea id="updateContent" name="content" class="form-control" placeholder="댓글을 입력하세요." rows="5"></textarea>
+                <textarea id="updateContent" name="content" class="form-control"
+                    placeholder="댓글 내용" rows="5"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">댓글 수정</button>
             <button type="button" class="btn btn-secondary" id="commentUpdateCancel">수정 취소</button>
         </form>
-        <!-- // 댓글 수정 -->
+        <!-- comment update -->
     </div>
 </div>
 
 <div class="row mt-3" id="commentListRow">
     <div class="col-12">
-        <!-- 댓글 목록 -->
+        <!--  comment list -->
         <div id="commentList">
             {% for comment in comments %}
-            <div class="card mb-3" data-comment-id="{{ comment.id }}">
+            <div class="card mb-3" data-comment-id="{{ comment.id}}">
                 <div class="card-body">
                     {{ comment.content | linebreaksbr }}
                 </div>
                 <div class="card-footer text-muted">
                     작성자: {{ comment.created_by.first_name }} |
-                    등록일시: {{ comment.created_at | date:"Y-m-d H:i" }} |
-                    수정일시: {{ comment.updated_at | date:"Y-m-d H:i" }}
+                    작성일: {{ comment.created_at | date:"Y-m-d H:i" }} |
+                    수정일: {{ comment.updated_at | date:"Y-m-d H:i" }}
                     {% if comment.created_by == request.user %}
                     <div class="float-end">
                         <a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>
                         <button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>
+
                     </div>
                     {% endif %}
                 </div>
             </div>
             {% endfor %}
         </div>
+        <!-- comment list -->
     </div>
-
 </div>
-
-<!-- 삭제 모달 -->
+<!-- Delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="deleteForm" action="{% url 'posts:delete' post_id=post.id %}" method="POST">
+            <form id="deleteForm" action="{%url 'posts:delete' post_id=post.id %}" method="POST">
                 {% csrf_token %}
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-danger" id="deleteModalModalLabel">
-                        <strong>게시글 삭제</strong>
+                        <strong>삭제</strong>
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <p class="text-danger">삭제된 데이터는 복구할 수 없습니다.</p>
-                        <p>비밀번호를 입력해주세요.</p>
+                        <p class="text-danger">
+                            정말로 게시글을 삭제하시겠습니까?
+                        </p>
+                        <p>
+                            비밀번호
+                        </p>
                     </div>
                     <div>
-                        <input type="password" id="password" name="password" placeholder="비밀번호" class="form-control">
+                        <input type="password" id="password" name="password" placeholder="비밀번호"
+                            class="form-control">
+
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-danger">삭제</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="submit" class="btn btn-danger">삭제</button>
+
                 </div>
             </form>
         </div>
     </div>
 </div>
+<!-- Delete Modal -->
+
+<!-- comment delete modal -->
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-danger" id="deleteCommentModalLabel">
+                    <strong>댓글 삭제</strong>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <p class="text-danger"> 삭제된 댓글은 복구할 수 없습니다.</p>
+                    <p>정말로 댓글을 삭제하시겠습니까?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger btn-comment-delete-confirm">댓글 삭제</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- comment delete modal -->
+
 {% endblock %}
 
 {% block script %}
 <script>
-    $(document).ready(function(){
-        // 댓글 등록 취소
-        $('#commentCreateCancel').on('click', function(){
+    $(document).ready(function () {
+        // comment create cancel
+        $('#commentCreateCancel').on('click', function () {
             $('#content').val('');
         });
-
-        // 댓글 등록 폼 검증 및 제출 처리
+        // validate comment create form
         $('#commentCreateForm').validate({
-            rules:{
-                content :{
-                    required:true,
-                    minlength :2,
-                    maxlength:1000
+            rules: {
+                content: {
+                    required: true,
+                    maxlength: 1000,
+                    minlength: 2
                 }
             },
-            messages:{
-                content:{
-                    required:'댓글을 입력하세요.',
-                    minlength:'댓글은 최소 2자 이상 입력하세요.',
-                    maxlength:'댓글은 최대 1000자 이하로 입력하세요.'
+            messages: {
+                content: {
+                    required: 'Please enter comment',
+                    maxlength: 'Please enter within 1000 characters',
+                    minlength: 'Please enter at least 2 characters'
                 }
             },
-            errorClass:'is-invalid',
-            validClass:'is-valid',
-            errorPlacement:function(error, element){
+            errorClass: 'is-invalid',
+            validClass: 'is-valid',
+            errorPlacement: function (error, element) {
                 error.addClass('invalid-feedback');
                 element.closest('.mb-3').append(error);
             },
-            submitHandler : function(form){
+            submitHandler: function (form) {
                 $.ajax({
-                    url: '{% url "comments:create" %}',
-                    type:'POST',
-                    data:{
-                        'post_id': {{ post.id }},
-                        'content': $('#content').val(),
+                    url: '{%url "comments:create" %}',
+                    type: 'POST',
+                    data: {
+                        'post_id': '{{ post.id }}',
+                        'content': $('#content').val()
                     },
-                    success: function(response){
-                        if (response.result == 'success'){
-                            // 댓글 목록 업데이트
+                    success: function (response) {
+                        if (response.result == 'success') {
+                            // add comment to comment list
                             let comments = response.comments;
                             let html = '';
-                            for (let comment of comments){
+                            for (let comment of comments) {
                                 html += '<div class="card mb-3" data-comment-id="' + comment.id + '">';
                                 html += '<div class="card-body">' + comment.content.replace(/\n/g, '<br>') + '</div>';
                                 html += '<div class="card-footer text-muted">';
-                                html += '작성자: ' + comment.created_by + ' | 등록일시: ' + comment.created_at;
-                                html += ' | 수정일시: ' + comment.updated_at;
+                                html += '작성자: ' + comment.created_by + ' | 작성일: ' + comment.created_at;
+                                html += ' | 수정일: ' + comment.updated_at;
                                 html += '<div class="float-end">';
                                 html += '<a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>';
                                 html += '<button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>';
@@ -183,91 +218,143 @@
                             }
                             $('#commentList').html(html);
                             $('#content').val('');
+
                         } else {
-                            alert(response.message);
+                            alert('Failed to create comment');
                         }
+                    }
+                });
             }
         });
 
-        // 댓글 수정
+        // comment update 
         $(document).on('click', '.btn-comment-update', function() {
             $('#commentCreateRow').addClass('d-none');
             $('#commentListRow').addClass('d-none');
             $('#commentUpdateRow').removeClass('d-none');
-            $('#updateContent').val('').val(
-                $(this).closest('.card').find('.card-body').html().trim().replace(/<br\s*\/?>/gi, '\n')
+            $('#updateContent').val(
+                $(this).closest('.card').find('.card-body').html().trim().replace(/<br>\s*\?>/gi, '\n')
             );
             comment_id = $(this).closest('.card').data('comment-id');
         });
 
-        // 댓글 수정 취소
+        // comment update cancel
         $('#commentUpdateCancel').on('click', function() {
             $('#commentUpdateRow').addClass('d-none');
             $('#commentCreateRow').removeClass('d-none');
             $('#commentListRow').removeClass('d-none');
             $('#updateContent').val('');
         });
-        // 댓글 수정 폼 검증
+
+        // validate comment update form
         $('#commentUpdateForm').validate({
             rules: {
                 content: {
                     required: true,
-                    minlength: 2,
-                    maxlength: 1000
+                    maxlength: 1000,
+                    minlength: 2
                 }
             },
             messages: {
                 content: {
-                    required: '댓글을 입력해주세요.',
-                    minlength: '댓글은 최소 2자 이상 입력해주세요.',
-                    maxlength: '댓글은 최대 1000자 이하로 입력해주세요.'
+                    required: 'Please enter comment',
+                    maxlength: 'Please enter within 1000 characters',
+                    minlength: 'Please enter at least 2 characters'
                 }
             },
             errorClass: 'is-invalid',
             validClass: 'is-valid',
             errorPlacement: function(error, element) {
-                error.addClass("invalid-feedback");
-                element.closest(".mb-3").append(error);
+                error.addClass('invalid-feedback');
+                element.closest('.mb-3').append(error);
             },
             submitHandler: function(form) {
                 $.ajax({
-    url: "{% url 'comments:update' comment_id=0 %}",
-    type: "POST",
-    data: {
-        'post_id': {{ post_id }},
-        'comment_id': comment_id,
-        'content': $('#updateContent').val(),
-    },
-    success: function(response) {
-        if (response.result == 'success') {
-            // 댓글 목록 업데이트
-            let comments = response.comments;
-            let html = '';
-
-            for (let comment of comments) {
-                html += '<div class="card mb-3" data-comment-id="' + comment.id + '">';
-                html += '<div class="card-body">' + comment.content.replace(/\n/g, '<br>') + '</div>';
-                html += '<div class="card-footer text-muted">';
-                html += '작성자: ' + comment.created_by;
-                html += ' | 등록일시: ' + comment.created_at;
-                html += ' | 수정일시: ' + comment.updated_at;
-                html += '<div class="float-end">';
-                html += '<a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>';
-                html += '<button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>';
-                html += '</div>';
-                html += '</div>';
-                html += '</div>';
-            }
-
+                    url: '{% url "comments:update" comment_id=0 %}',
+                    type: 'POST',
+                    data: {
+                        'post_id': {{ post.id }},
+                        'comment_id': comment_id,
+                        'content': $('#updateContent').val(),
+                    },
+                    success: function(response) {
+                        if (response.result == 'success') {
+                            // add comment to comment list
+                            let comments = response.comments;
+                            let html = '';
+                            for (let comment of comments) {
+                                html += '<div class="card mb-3" data-comment-id="' + comment.id + '">';
+                                html += '<div class="card-body">' + comment.content.replace(/\n/g, '<br>') + '</div>';
+                                html += '<div class="card-footer text-muted">';
+                                html += '작성자: ' + comment.created_by + ' | 작성일: ' + comment.created_at;
+                                html += ' | 수정일: ' + comment.updated_at;
+                                html += '<div class="float-end">';
+                                html += '<a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>';
+                                html += '<button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</div>';
+                            }
+            $('#commentList').html(html);
             $('#commentList').html(html);
             $('#updateContent').val('');
-            $('#commentUpdateRow').addClass('d-none');
-            $('#commentCreateRow').removeClass('d-none');
-            $('#commentListRow').removeClass('d-none');
-        } else {
-            alert(response.message);
-        }
-    }
-});
+                            $('#commentList').html(html);
+            $('#updateContent').val('');
+                            $('#commentUpdateRow').addClass('d-none');
+                            $('#commentCreateRow').removeClass('d-none');
+                            $('#commentListRow').removeClass('d-none');
+                            $('#updateContent').val('');
+                        } else {
+                            alert('댓글 수정에 실패하였습니다. ');
+                        }
+                    }
+                });
+            }
+        });
+
+        // comment delete
+        $(document).on('click', '.btn-comment-delete', function() {
+            comment_id = $(this).closest('.card').data('comment-id');
+            $('#deleteCommentModal').modal('show');
+        });
+
+        // comment delete confirm
+        $('#deleteCommentModal').on('click', '.btn-comment-delete-confirm', function() {
+            $.ajax({
+                url: '{% url "comments:delete" comment_id=0 %}',
+                type: 'POST',
+                data: {
+                    'post_id': {{ post.id }},
+                    'comment_id': comment_id,
+                },
+                success: function(response) {
+                    if (response.result == 'success') {
+                        // add comment to comment list
+                        let comments = response.comments;
+                        let html = '';
+                        for (let comment of comments) {
+                            html += '<div class="card mb-3" data-comment-id="' + comment.id + '">';
+                            html += '<div class="card-body">' + comment.content.replace(/\n/g, '<br>') + '</div>';
+                            html += '<div class="card-footer text-muted">';
+                            html += '작성자: ' + comment.created_by + ' | 작성일: ' + comment.created_at;
+                            html += ' | 수정일: ' + comment.updated_at;
+                            html += '<div class="float-end">';
+                            html += '<a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>';
+                            html += '<button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        $('#commentList').html(html);
+                        $('#deleteCommentModal').modal('hide');
+                    } else {
+                        alert('댓글 삭제에 실패하였습니다.');
+                    }
+                }
+
+            })
+        })
+
+    });
 </script>
 {% endblock %}
