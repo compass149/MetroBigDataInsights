@@ -1,20 +1,22 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib import messages
 
 # 사용자 목록
 @login_required(login_url='auth:login')
-@user_passes_test(lambda u: u.is_superuser)
+@permission_required('auth.view_user', raise_exception=True)
 def get_users(request):
     page = request.GET.get('page', '1')
-    searchType = request.GET.get('searchType')
-    searchKeyword = request.GET.get('searchKeyword')
+    searchType = request.GET.get('searchType', '').strip()
+    searchKeyword = request.GET.get('searchKeyword', '').strip()
     users = User.objects.all().order_by('username')
 
-    # 검색 조건 처리
-    if searchType not in [None, ''] and searchKeyword not in [None, '']:
+    if searchType and searchKeyword:
         if searchType == 'all':
             users = users.filter(
                 Q(username__icontains=searchKeyword) |
@@ -28,38 +30,37 @@ def get_users(request):
         elif searchType == 'email':
             users = users.filter(email__icontains=searchKeyword)
 
-    # 페이지네이션
     paginator = Paginator(users, 10)  # 페이지당 10명
     page_obj = paginator.get_page(page)
-
-    # 사용자 리스트에 순번 추가
     start_index = paginator.count - (paginator.per_page * (page_obj.number - 1))
-    users_with_index = [
-        {
-            'index_num': start_index - idx,
-            'user': user
-        }
-        for idx, user in enumerate(page_obj)
-    ]
 
     return render(request, 'users/list.html', {
-        'users': users_with_index,
+        'users': page_obj,
         'searchType': searchType,
         'searchKeyword': searchKeyword,
         'paginator': paginator,
         'page_obj': page_obj,
+        'start_index': start_index,  # 순번 계산용
     })
 
 
 # 사용자 보기
 @login_required(login_url='auth:login')
-@user_passes_test(lambda u: u.is_superuser)
+@permission_required('auth.view_user', raise_exception=True)
 def get_user(request, user_id):
-    return HttpResponse('사용자 보기')
+    user = get_object_or_404(User, id=user_id)
+    return render(request, 'users/read.html', {'user': user})
 
 
 # 사용자 삭제
 @login_required(login_url='auth:login')
-@user_passes_test(lambda u: u.is_superuser)
+@permission_required('auth.delete_user', raise_exception=True)
 def delete_user(request, user_id):
-    return HttpResponse('사용자 삭제')
+    if request.method == 'POST':
+        user = get_object_or_404(User, id=user_id)
+        user.delete()
+        messages.success(request, f"사용자 '{user.username}'이(가) 삭제되었습니다.")
+        return HttpResponseRedirect(reverse('users:list'))
+    else:
+        messages.error(request, "잘못된 요청입니다.")
+        return HttpResponseRedirect(reverse('users:list'))
