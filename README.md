@@ -8,8 +8,3 @@
 7. pip install django-tinymce
 8. python manage.py makemigrations
 9. python manage.py runserver
-
-
-## 관리자 계졍
-아이디 admin123
-비밀번호 admin123
