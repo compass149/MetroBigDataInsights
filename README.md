@@ -1,4 +1,4 @@
-##실행 방법
+## 실행 방법
 1. cd mysite
 2. python -m venv venv
 3. venv\Scripts\activate
