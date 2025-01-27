@@ -44,7 +44,9 @@
                 <tbody>
                     {% for user in users %}
                     <tr>
-                        <td class="text-center">{{ start_index|add:"-"|add:forloop.counter0 }}</td>
+                        <td class="text-center">
+                            {{ start_index|add:forloop.counter }}
+                        </td>
                         <td><a href="{% url 'users:read' user_id=user.id %}">{{ user.username }}</a></td>
                         <td class="text-center">{{ user.first_name }}</td>
                         <td class="text-center">{{ user.email }}</td>
