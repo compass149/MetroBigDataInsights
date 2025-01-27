@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>장고 웹 프로젝트</title>
-    <!-- 부트스트랩 css -->
+    <title>장고 프로젝트</title>
+    <!-- 부트스트랩 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- STATIC css -->
+    <!-- STATIC CSS -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <style>
-        body{
+        body {
             padding-top: 80px;
         }
     </style>     
@@ -18,10 +18,10 @@
 </head>
 <body>
     <div class="container">
-        <!-- 네비게이션 -->
+        <!-- 상단 네비게이션 바 -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="#">프로젝트</a>
+                <a class="navbar-brand" href="{% url 'intro:index' %}">프로젝트</a>
                 <button class="navbar-toggler collapsed" type="button"
                         data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,56 +56,79 @@
                         </ul>
                     </div>
                 </div>
-            </dvi>
+            </div>
         </nav>
-        <!-- 페이지 제목 -->
-        {% block page_title %} {% endblock %}
 
-        <!-- 메시지 -->
-        {% if messages %}
-            <div class="row">
-                <div class="{% if message_class %}{{ message_class}}{% else %}col-12{% endif %}">
-                    {% for message in messages %}
-                        {% if message.tags == "error" %}
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        {% endif %}
-                        {% if message.tags == "success" %}
-                            <div class="row">
-                                <div class="{{ message_class }}">
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <!-- 전체 레이아웃: 사이드바 + 메인 영역 -->
+        <div class="row mt-3">
+            <!-- 사이드바 영역 -->
+            <div class="col-md-3">
+                <div class="list-group">
+                    <!-- 원하는 메뉴 항목들 -->
+                    <a href="#" class="list-group-item list-group-item-action">프로젝트로그/제목</a>
+                    <a href="#" class="list-group-item list-group-item-action">프로젝트 소개</a>
+                    <!-- '팀원소개' 메뉴 클릭 시 member 페이지로 이동 -->
+                    <a href="{% url 'intro:member' %}" class="list-group-item list-group-item-action">팀원소개</a>
+                    <a href="#" class="list-group-item list-group-item-action">프로젝트설명/데이터 출처</a>
+                    <a href="#" class="list-group-item list-group-item-action">차트</a>
+                    <a href="#" class="list-group-item list-group-item-action">마지막글</a>
+                </div>
+            </div>
+
+            <!-- 메인 컨텐츠 영역 -->
+            <div class="col-md-9">
+                <!-- 페이지 제목 (옵션) -->
+                {% block page_title %} 
+                {% endblock %}
+
+                <!-- 메시지 블록 (Django messages) -->
+                {% if messages %}
+                    <div class="row">
+                        <div class="{% if message_class %}{{ message_class}}{% else %}col-12{% endif %}">
+                            {% for message in messages %}
+                                {% if message.tags == "error" %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         {{ message }}
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                                {% elif message.tags == "success" %}
+                                    <div class="row">
+                                        <div class="{{ message_class }}">
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                {{ message }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <!-- 실제 페이지별 콘텐츠 출력 영역 -->
+                {% block content %}
+                {% endblock %}
             </div>
-        {% endif %}
-        <!-- 페이지 내용 -->
-        {% block content %}{% endblock %}
+        </div>
     </div>
-    <!-- 부트스트랩 js -->
+
+    <!-- 부트스트랩 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JQUERY -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <!-- jquery validation -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-    <!-- <script src="https://cdn.jsdeli`vr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script> -->
 
-    <!-- tinymce -->
+    <!-- tinymce (예시) -->
     <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
 
-    <!-- STATIC JS -->
+    <!-- 프로젝트별 script.js (필요할 경우) -->
     <script src="{% static 'script.js' %}"></script>
     <script>
         $(document).ready(function(){
-            //모든 ajax 요청에 대한 CSRF 토큰을 자동으로 포함
+            // 모든 ajax 요청에 대한 CSRF 토큰 자동 포함
             $.ajaxSetup({
                 beforeSend: function(xhr, settings){
                     if (!this.crossDomain){
@@ -116,6 +139,6 @@
             });
         });
     </script>
-    {% block script %} {% endblock %}
+    {% block script %}{% endblock %}
 </body>
 </html>
