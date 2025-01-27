@@ -67,9 +67,8 @@
                     <!-- 원하는 메뉴 항목들 -->
                     <a href="#" class="list-group-item list-group-item-action">프로젝트로그/제목</a>
                     <a href="#" class="list-group-item list-group-item-action">프로젝트 소개</a>
-                    <!-- '팀원소개' 메뉴 클릭 시 member 페이지로 이동 -->
                     <a href="{% url 'intro:member' %}" class="list-group-item list-group-item-action">팀원소개</a>
-                    <a href="#" class="list-group-item list-group-item-action">프로젝트설명/데이터 출처</a>
+                    <a href="{% url 'intro:data_source' %}" class="list-group-item list-group-item-action">데이터 설명</a>
                     <a href="#" class="list-group-item list-group-item-action">차트</a>
                     <a href="#" class="list-group-item list-group-item-action">마지막글</a>
                 </div>

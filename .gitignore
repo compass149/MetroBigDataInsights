@@ -15,3 +15,5 @@ media/
 # IDE/편집기 설정 파일
 .vscode/
 .idea/
+mysite/mysite/__pycache__/settings.cpython-312.pyc
+mysite/mysite/__pycache__/urls.cpython-312.pyc
