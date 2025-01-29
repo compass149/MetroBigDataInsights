@@ -1,9 +1,25 @@
 {% extends "../base.html" %}
 {% block content %}
-<div class="row">
-    <div class="col-4 mx-auto">
-        <!-- 프로필 -->
-        <div class="card mb-3">
+<style>
+    /* 화면 너비가 768px 이하일 때: 프로필 카드의 너비를 100%로 */
+    @media (max-width: 768px) {
+        .profile-card {
+            width: 100%;
+        }
+    }
+    /* 화면 너비가 769px 이상일 때: 프로필 카드의 너비를 고정 */
+    @media (min-width: 769px) {
+        .profile-card {
+            width: 530px;
+        }
+    }
+</style>
+
+<!-- 묶음(세트) 전체를 Bootstrap row/col로 감싸고, 가운데 정렬 -->
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <!-- 프로필 카드 -->
+        <div class="card mb-3 profile-card mx-auto">
             <div class="card-header">
                 <h5 class="card-title">프로필</h5>
             </div>
@@ -29,12 +45,27 @@
                 </p>
             </div>
         </div>
-        <!--//프로필 -->
-        <div class="text-center">
-            <a href="{% url 'auth:update_profile' %}" class="btn btn-success mx-2">프로필 수정</a>
-            <a href="{% url 'auth:update_password' %}" class="btn btn-warning mx-2">비밀번호 변경</a>
-            <a href="{% url 'auth:delete_account' %}" class="btn btn-danger mx-2">회원탈퇴</a>
+        <!--// 프로필 카드 끝 -->
+
+        <!-- 버튼들: 가로로 나란히 중앙 정렬 -->
+        <div class="text-center mt-3">
+            <a href="{% url 'auth:update_profile' %}"
+               class="btn"
+               style="background-color: #172E55; color: white; margin: 0 5px;">
+                프로필 수정
+            </a>
+            <a href="{% url 'auth:update_password' %}"
+               class="btn"
+               style="background-color: #3C77DD; color: white; margin: 0 5px;">
+                비밀번호 변경
+            </a>
+            <a href="{% url 'auth:delete_account' %}"
+               class="btn"
+               style="background-color: rgb(189, 49, 61); color: white; margin: 0 5px;">
+                회원탈퇴
+            </a>
         </div>
+        <!--// 버튼들 끝 -->
     </div>
 </div>
 {% endblock %}

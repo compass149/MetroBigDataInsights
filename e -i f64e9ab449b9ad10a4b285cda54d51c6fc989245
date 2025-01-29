@@ -1,0 +1,37 @@
+[33mcommit 8df455175155911bf2d2188dbd5fe3bc7cad2b01[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: compass149 <a01055821627@gmail.com>
+Date:   Tue Jan 28 00:47:29 2025 +0900
+
+    [test]
+
+[1mdiff --git a/mysite/templates/base.html b/mysite/templates/base.html[m
+[1mindex 0bd0d1b..14d14c9 100644[m
+[1m--- a/mysite/templates/base.html[m
+[1m+++ b/mysite/templates/base.html[m
+[36m@@ -12,10 +12,10 @@[m
+     <style>[m
+         body {[m
+             padding-top: 80px;[m
+[31m-            background-color: #f5f5f5; /* 지하철 느낌을 살리기 위해 밝은 배경색 */[m
+[32m+[m[32m            background-color: #f5f5f5;[m[41m [m
+         }[m
+         .navbar {[m
+[31m-            background-color:rgb(35, 69, 128); /* 서울 지하철 블루 */[m
+[32m+[m[32m            background-color:rgb(35, 69, 128);[m[41m [m
+         }[m
+         .navbar-brand {[m
+             font-weight: bold;[m
+[36m@@ -30,11 +30,11 @@[m
+             background-color: #d9e8f5;[m
+         }[m
+         .list-group-item.active {[m
+[31m-            background-color: rgb(35, 69, 128);;[m
+[32m+[m[32m            background-color: rgb(35, 69, 128);[m
+             color: white;[m
+         }[m
+         footer {[m
+[31m-            background-color: rgb(35, 69, 128);; /* 지하철 블루 */[m
+[32m+[m[32m            background-color: rgb(35, 69, 128);[m
+         }[m
+         footer h6, footer p {[m
+             color: #ffffff;[m
