@@ -1,12 +1,26 @@
 {% extends "../base.html" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-4 mx-auto">
+<style>
+    /* 반응형 크기 조정 */
+    @media (max-width: 768px) {
+        .login-card {
+            width: 100%;
+        }
+    }
+    @media (min-width: 769px) {
+        .login-card {
+            width: 530px;
+        }
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-auto">
         <!-- 로그인 -->
         <form id="loginForm" method="POST">
             {% csrf_token %}
-            <div class="card mb-3">
+            <div class="card mb-3 login-card mx-auto">
                 <div class="card-header">
                     <h5 class="card-title">로그인</h5>
                 </div>
@@ -32,14 +46,29 @@
                         {% endif %}
                     </div>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">로그인</button>
+                        <button type="submit" class="btn" 
+                                style="background-color: #172E55; color: white;">
+                            로그인
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="{% url 'auth:register' %}" class="btn btn-success mx-2">회원가입</a>
-                <a href="{% url 'auth:find_username' %}" class="btn btn-warning mx-2">아이디 찾기</a>
-                <a href="{% url 'auth:reset_password' %}" class="btn btn-danger mx-2">비밀번호 초기화</a>
+            <div class="text-center mt-3">
+                <a href="{% url 'auth:register' %}" 
+                   class="btn" 
+                   style="background-color: #3C77DD; color: white; margin: 0 5px;">
+                    회원가입
+                </a>
+                <a href="{% url 'auth:find_username' %}" 
+                   class="btn" 
+                   style="background-color: #FFA500; color: white; margin: 0 5px;">
+                    아이디 찾기
+                </a>
+                <a href="{% url 'auth:reset_password' %}" 
+                   class="btn" 
+                   style="background-color: rgb(189, 49, 61); color: white; margin: 0 5px;">
+                    비밀번호 초기화
+                </a>
             </div>
         </form>
         <!-- //로그인 -->
@@ -50,31 +79,23 @@
 {% block script %}
 <script>
     $(document).ready(function(){
-        //로그인 폼 검즘
+        // 로그인 폼 검증
         $('#loginForm').validate({
-            rules :{
-                username:{
-                    required: true,
-                },
-                password:{
-                    required: true,
-                },
+            rules: {
+                username: { required: true },
+                password: { required: true },
             },
-            messages :{
-                username:{
-                    required: '아이디를 입력하세요.',
-                },
-                password:{
-                    required: '비밀번호를 입력하세요.',
-                },
+            messages: {
+                username: { required: '아이디를 입력하세요.' },
+                password: { required: '비밀번호를 입력하세요.' },
             },
-            errorClass : 'is-invalid',
-            validClass :'is-valid',
+            errorClass: 'is-invalid',
+            validClass: 'is-valid',
             errorPlacement: function(error, element){
                 error.addClass('invalid-feedback');
-                element.closet('.mb-3').append(error);
+                element.closest('.mb-3').append(error);
             },
-            submitHandler : function(form){
+            submitHandler: function(form){
                 form.submit();
             }
         });

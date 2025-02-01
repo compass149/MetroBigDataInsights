@@ -1,16 +1,32 @@
+{% extends "../base.html" %}
+
 {% block content %}
-<div class="row">
-    <div class="col-4 mx-auto">
+<style>
+    /* 반응형 크기 조정 */
+    @media (max-width: 768px) {
+        .find-username-card {
+            width: 100%;
+        }
+    }
+    @media (min-width: 769px) {
+        .find-username-card {
+            width: 530px;
+        }
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-auto">
         <!-- 아이디 찾기 -->
         <form id="findUsernameForm" method="POST">
             {% csrf_token %}
-            <div class="card mb-3">
+            <div class="card mb-3 find-username-card mx-auto">
                 <div class="card-header">
                     <h5 class="card-title">아이디 찾기</h5>
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="first_name" class="form-label">이름 <span class="text-danger">*</span></label>
+                        <label for="first_name" class="form-label text-start d-block">이름 <span class="text-danger">*</span></label>
                         <input type="text" id="first_name" name="first_name" class="form-control"
                             placeholder="이름을 입력하세요." value="{{ form.first_name.value|default_if_none:'' }}">
                         {% if form.first_name.errors %}
@@ -20,7 +36,7 @@
                         {% endif %}
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">이메일 <span class="text-danger">*</span></label>
+                        <label for="email" class="form-label text-start d-block">이메일 <span class="text-danger">*</span></label>
                         <input type="email" id="email" name="email" class="form-control"
                             placeholder="이메일을 입력하세요." value="{{ form.email.value|default_if_none:'' }}">
                         {% if form.email.errors %}
@@ -29,37 +45,46 @@
                         </div>
                         {% endif %}
                     </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn" 
+                                style="background-color: #172E55; color: white;">
+                            아이디 찾기
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div>
-                <button type="submit" class="btn btn-primary">아이디 찾기</button>
-                <a href="{% url 'auth:reset_password' %}" class="btn btn-danger">비밀번호 초기화</a>
-                <a href="{% url 'auth:login' %}" class="btn btn-secondary">로그인</a>
+            <div class="text-center mt-3">
+                <a href="{% url 'auth:reset_password' %}" 
+                   class="btn" 
+                   style="background-color: rgb(189, 49, 61); color: white; margin: 0 5px;">
+                    비밀번호 초기화
+                </a>
+                <a href="{% url 'auth:login' %}" 
+                   class="btn" 
+                   style="background-color: #3C77DD; color: white; margin: 0 5px;">
+                    로그인
+                </a>
             </div>
         </form>
         <!--// 아이디 찾기 -->
     </div>
 </div>
 {% endblock %}
+
 {% block script %}
 <script>
 $(document).ready(function () {
     // 아이디 찾기 폼 검증
     $('#findUsernameForm').validate({
         rules: {
-            first_name: {
-                required: true,
-            },
-            email: {
-                required: true,
-            },
+            first_name: { required: true },
+            email: { required: true, email: true },
         },
         messages: {
-            first_name: {
-                required: '이름을 입력하세요.',
-            },
-            email: {
-                required: '이메일을 입력하세요.',
+            first_name: { required: '이름을 입력하세요.' },
+            email: { 
+                required: '이메일을 입력하세요.', 
+                email: '유효한 이메일 주소를 입력하세요.'
             },
         },
         errorClass: 'is-invalid',
