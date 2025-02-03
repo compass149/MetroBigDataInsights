@@ -36,8 +36,6 @@ class RegisterForm(forms.ModelForm):
         # 비밀번호 복잡성 검증
         if not any(char.isdigit() for char in password1):
             raise forms.ValidationError("비밀번호는 최소 1개의 숫자를 포함해야 합니다.")
-        if not any(char.isupper() for char in password1):
-            raise forms.ValidationError("비밀번호는 최소 1개의 대문자를 포함해야 합니다.")
         if not any(char.islower() for char in password1):
             raise forms.ValidationError("비밀번호는 최소 1개의 소문자를 포함해야 합니다.")
         if not any(char in "!@#$%^&*()-_+=[]{}|\\:;\"'<>,.?/" for char in password1):
@@ -176,8 +174,6 @@ class PasswordUpdateForm(forms.Form):
         # 비밀번호 복잡성 검증
         if not any(char.isdigit() for char in password1):
             raise forms.ValidationError("비밀번호는 최소 1개의 숫자를 포함해야 합니다.")
-        if not any(char.isupper() for char in password1):
-            raise forms.ValidationError("비밀번호는 최소 1개의 대문자를 포함해야 합니다.")
         if not any(char.islower() for char in password1):
             raise forms.ValidationError("비밀번호는 최소 1개의 소문자를 포함해야 합니다.")
         if not any(char in "!@#$%^&*()-_+=[]{}|\\:;\"'<>,.?/" for char in password1):
