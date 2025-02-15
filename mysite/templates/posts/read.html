@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card mb-3">
             <h5 class="card-header text-primary">
-                <strong>{{ post.title }}</strong>
+                <strong style="color: #172E55;">{{ post.title }}</strong>
             </h5>
             <div class="card-body">
                 <div class="mb-3 text-muted">
@@ -16,7 +16,7 @@
 
                 {% if post.filename %}
                 <div class="mb-3 text-muted">
-                    첨부 파일: <a href="{% url 'posts:download' post.id %}">{{ post.original_filename }}</a>
+                    첨부 파일: <a style="text-decorate:none" href="{% url 'posts:download' post.id %}">{{ post.original_filename }}</a>
                 </div>
                 {% endif %}
 
@@ -27,9 +27,9 @@
             </div>
         </div>
         <div>
-            <a href="{% url 'posts:list' %}" class="btn btn-primary">목록</a>
+            <a href="{% url 'posts:list' %}" class="btn btn-primary" style="background: #172E55; border-color:#172E55">목록</a>
             {% if post.created_by == request.user %}
-            <a href="{% url 'posts:update' post_id=post.id %}" class="btn btn-warning">수정</a>
+            <a href="{% url 'posts:update' post_id=post.id %}" class="btn btn-primary">수정</a>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                 data-bs-target="#deleteModal">삭제</button>
             {% endif %}
@@ -46,7 +46,7 @@
             <div class="mb-3">
                 <textarea id="content" name="content" class="form-control" placeholder="댓글 내용" rows="5"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">댓글 작성</button>
+            <button type="submit" class="btn btn-primary" style="background: #172E55; border-color:#172E55">댓글 작성</button>
             <buttont type="button" class="btn btn-secondary" id="commentCreateCancel">취소</button>
         </form>
         <!-- comment create -->
@@ -83,7 +83,7 @@
                     수정일: {{ comment.updated_at | date:"Y-m-d H:i" }}
                     {% if comment.created_by == request.user %}
                     <div class="float-end">
-                        <a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>
+                        <a href="#" class="btn btn-primary btn-sm btn-comment-update" style="background: #172E55; border-color:#172E55; color:white">댓글 수정</a>
                         <button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>
 
                     </div>
@@ -210,7 +210,7 @@
                                 html += '작성자: ' + comment.created_by + ' | 작성일: ' + comment.created_at;
                                 html += ' | 수정일: ' + comment.updated_at;
                                 html += '<div class="float-end">';
-                                html += '<a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>';
+                                html += '<a href="#" class="btn btn-primary btn-sm btn-comment-update" >댓글 수정</a>';
                                 html += '<button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>';
                                 html += '</div>';
                                 html += '</div>';
@@ -289,7 +289,7 @@
                                 html += '작성자: ' + comment.created_by + ' | 작성일: ' + comment.created_at;
                                 html += ' | 수정일: ' + comment.updated_at;
                                 html += '<div class="float-end">';
-                                html += '<a href="#" class="btn btn-warning btn-sm btn-comment-update">댓글 수정</a>';
+                                html += '<a href="#" class="btn btn-primary btn-sm btn-comment-update">댓글 수정</a>';
                                 html += '<button type="button" class="btn btn-danger btn-sm ms-2 btn-comment-delete">댓글 삭제</button>';
                                 html += '</div>';
                                 html += '</div>';

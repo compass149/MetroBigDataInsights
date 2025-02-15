@@ -4,65 +4,48 @@
 <div class="row">
     <div class="col-12">
         <!-- 게시글 등록 -->
-        <form id="createForm" method="POST"  enctype="multipart/form-data">
+        <form id="createForm" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="card mb-3">
                 <div class="card-header">
                     <span class="text-danger">*</span> 표시는 필수항목입니다.
                 </div>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label for="title" class="form-label">제목 <span class="text-danger">*</span></label>
-                        <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요."
-                            value="{{ form.title.value|default_if_none:'' }}">
-                        {% if form.title.errors %}
-                        <div class="form-text text-danger">
-                            {{ form.title.errors.0 }}
+                    <div class="mb-3 row">
+                        <label for="title" class="col-sm-2 col-form-label">제목 <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요."
+                                value="{{ form.title.value|default_if_none:'' }}">
+                            {% if form.title.errors %}
+                            <div class="form-text text-danger">
+                                {{ form.title.errors.0 }}
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
-                    <div class="mb-3">
-                        <label for="content" class="form-label">
-                            내용 <span class="text-danger">*</span>
-                        </label>
-                        <textarea rows="10" id="content" name="content" class="form-control" placeholder="내용을 입력하세요.">
-                            {{ form.content.value|default_if_none:'' }}
-                        </textarea>
-                        {% if form.content.errors %}                    
-                        <div class="form-text text-danger">
-                            {{ form.content.errors.0 }}
+                    <div class="mb-3 row">
+                        <label for="content" class="col-sm-2 col-form-label">내용 <span class="text-danger">*</span></label>
+                        <div class="col-sm-10">
+                            <textarea rows="10" id="content" name="content" class="form-control" placeholder="내용을 입력하세요.">
+                                {{ form.content.value|default_if_none:'' }}
+                            </textarea>
+                            {% if form.content.errors %}                    
+                            <div class="form-text text-danger">
+                                {{ form.content.errors.0 }}
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
-                    <!-- <div class="mb-3">
-                        <label for="username" class="form-label">
-                            글쓴이 <span class="text-danger">*</span>
-                        </label>
-                        <input type="text" id="username" name="username" class="form-control" placeholder="글쓴이를 입력하세요."
-                            value= "{{ form.username.value|default_if_none:'' }}">
-                            {% if form.username.errors %}                    
-                        <div class="form-text text-danger">
-                            {{ form.username.errors.0 }}
+                    <div class="mb-3 row">
+                        <label for="uploadFile" class="col-sm-2 col-form-label">첨부 파일</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="uploadFile" name="uploadFile" accept="image/*">
                         </div>
-                        {% endif %}
-                    </div>
-                    <div>
-                        <label for="password" class="form-label">비밀번호 <span class="text-danger">*</span></label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요.">
-                        {% if form.password.errors %}                    
-                        <div class="form-text text-danger">
-                            {{ form.password.errors.0 }}
-                        </div>
-                        {% endif %}
-                    </div> -->
-                    <div>
-                        <label for="uploadFile" class="form-label">첨부 파일</label>
-                        <input type="file" class="form-control" id="uploadFile" name="uploadFile" accept="image/*">
                     </div>
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary">등록</button>
+                <button type="submit" class="btn btn-primary" style="background: #172E55; border-color:#172E55">등록</button>
                 <a href="{% url 'posts:list' %}" class="btn btn-secondary">취소</a>
             </div>
         </form>
@@ -70,41 +53,6 @@
     </div>
 </div>
 {% endblock %}
-
-{% comment %}
-{% block script %}
-<script>
-    $(document).ready(function(){
-        //게시글 폼 검증
-        $('createForm').submit(function(event){
-            event.preventDefault();
-
-            if($('#title').val() == ''){
-                alert('제목을 입력하세요.');
-                $('#title').focus();
-                return false;
-            }
-            if($('#content').val() == ''){
-                alert('내용을 입력하세요.');
-                $('#content').focus();
-                return false;
-            }
-            if($('#username').val() == ''){
-                alert('작성자를 입력하세요.');
-                $('#username').focus();
-                return false;
-            }
-            if($('#password').val() == ''){
-                alert('비밀번호를 입력하세요.');
-                $('#password').focus();
-                return false;
-            }
-            return true;
-        });
-    });
-</script>
-{% endblock %}
-{% endcomment %}
 
 {% block script %}
 <script>
@@ -154,21 +102,6 @@
                     minlength:2,
                     maxlength:100
                 },
-                // content:{
-                //     required : true,
-                //     minlength:2,
-                //     maxlength:1000
-                // },
-                // username:{
-                //     required : true,
-                //     minlength:2,
-                //     maxlength:10
-                // },
-                // password:{
-                //     required : true,
-                //     minlength:4,
-                //     maxlength:20
-                // }
             },
             messages:{
                 title:{
@@ -176,21 +109,6 @@
                     minlength :'제목은 최소 2자 이상 입력하세요',
                     maxlength:'제목은 최대 100자 이하로 입력하세요.'
                 },
-                // content:{
-                //     required:'내용을 입력하세요.',
-                //     minlength :'내용은 최소 2자 이상 입력하세요',
-                //     maxlength:'내용은 최대 1000자 이하로 입력하세요.'
-                // },
-                // password:{
-                //     required:'비밀번호를 입력하세요.',
-                //     minlength :'비밀번호는 최소 2자 이상 입력하세요',
-                //     maxlength:'비밀번호는 최대 100자 이하로 입력하세요.'
-                // },
-                // username:{
-                //     required:'작성자를 입력하세요.',
-                //     minlength :'작성자는 최소 2자 이상 입력하세요',
-                //     maxlength:'작성자는 최대 100자 이하로 입력하세요.'
-                // }
             },
             errorClass : 'is-invalid',
             validClass :'is-valid',

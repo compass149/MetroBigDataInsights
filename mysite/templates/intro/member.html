@@ -5,46 +5,45 @@
     <h2>팀원 소개</h2>
     <p>여기에 팀원 소개 관련 내용을 넣으세요.</p>
     <div class="row">
-        <!-- 예: 부트스트랩 카드 활용 -->
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card mb-3">
+                <img src="{% static '../static/images/수호.jpg' %}" class="card-img-top" alt="팀원 사진" 
+                style="width: 100%; height: 500px; object-fit: cover;">
                 <div class="card-body">
-                    <h5 class="card-title">팀원1</h5>
-                    <p class="card-text">간단한 소개글</p>
+                    <h5 class="card-title">김수호</h5>
+                    <p class="card-text">팀장, 데이터 수집 및 가공, Tableau 차트 작성, 프로젝트 기록</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card mb-3">
+                <img src="{% static '../static/images/은호.png' %}" class="card-img-top" alt="팀원 사진" 
+                style="width: 100%; height: 500px; object-fit: cover;">
                 <div class="card-body">
-                    <h5 class="card-title">팀원2</h5>
-                    <p class="card-text">간단한 소개글</p>
+                    <h5 class="card-title">오은호</h5>
+                    <p class="card-text">데이터 수집 및 가공, Django 웹페이지 제작</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card mb-3">
+                <img src="{% static '../static/images/승주.png' %}" class="card-img-top" alt="팀원 사진" 
+                style="width: 100%; height: 450px; object-fit: cover;">
                 <div class="card-body">
-                    <h5 class="card-title">팀원3</h5>
-                    <p class="card-text">간단한 소개글</p>
+                    <h5 class="card-title">정승주</h5>
+                    <p class="card-text">주제 선정, 데이터 수집 및 전처리, 보고서 작성</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card mb-3">
+                <img src="{% static '../static/images/병진.png' %}" class="card-img-top" alt="팀원 사진" 
+                style="width: 100%; height: 450px; object-fit: cover;">
                 <div class="card-body">
-                    <h5 class="card-title">팀원4</h5>
-                    <p class="card-text">간단한 소개글</p>
+                    <h5 class="card-title">최병진</h5>
+                    <p class="card-text">데이터 수집 및 전처리, python을 활용한 가공</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">팀원5</h5>
-                    <p class="card-text">간단한 소개글</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div>    
 {% endblock %}

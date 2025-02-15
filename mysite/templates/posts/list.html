@@ -15,13 +15,13 @@
                         <option value="first_name" {% if searchType == 'first_name' %}selected{% endif %}>작성자</option>
                     </select>
                     <input type="text" name="searchKeyword" class="form-control w-auto" value="{{ searchKeyword|default_if_none:'' }}"/>
-                    <button type="submit" class="btn btn-primary">검색</button>
+                    <button type="submit" class="btn btn-primary" style="background: #172E55; border-color:#172E55">검색</button>
                     {% if searchType != null %}
                         <a href="{% url 'posts:list' %}" class="btn btn-danger">취소</a>    
                     {% endif %}
                 </div>
              </form>
-            <a href="{% url 'posts:create' %}" class="btn btn-primary">등록</a>    
+            <a href="{% url 'posts:create' %}" class="btn btn-primary" style="background: #172E55; border-color:#172E55">등록</a>    
         </div>
     </div>
 </div>
@@ -60,32 +60,53 @@
       <!-- 페이지네이션 -->
       <div>
         <nav aria-label="Page navigation">
-          <ul class="pagination justify-content-center">
-            <!-- 이전 페이지 -->
-            {% if posts.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ posts.previous_page_number }}">이전</a>
-            </li>
-            {% endif %}
-            <!-- 페이지 리스트 -->
-            {% for page_number in posts.paginator.page_range %}
-            {% if page_number >= posts.number|add:-5 and page_number <= posts.number|add:5 %}
+            <ul class="pagination justify-content-center">
+                <!-- 이전 페이지 -->
+                {% if posts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}">이전</a>
+                </li>
+                {% endif %}
+                <!-- 페이지 리스트 -->
+                {% for page_number in posts.paginator.page_range %}
+                {% if page_number >= posts.number|add:-5 and page_number <= posts.number|add:5 %}
+                
+                <li class="page-item {% if page_number == posts.number %}active{% endif %}">
+                    <a class="page-link" href="{% url 'posts:list' %}?page={{ page_number }}">
+                        {{ page_number }}
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+                <!-- 다음 페이지 -->
+                {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ posts.next_page_number }}">다음</a>
+                </li>
+                {% endif %}
+            <!-- // 다음 페이지 -->
+            </ul>
             
-            <li class="page-item {% if page_number == posts.number %}active{% endif %}">
-            <a class="page-link" href="{% url 'posts:list' %}?page={{ page_number }}">
-                {{ page_number }}
-            </a>
-            </li>
-            {% endif %}
-            {% endfor %}
-            <!-- 다음 페이지 -->
-            {% if posts.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ posts.next_page_number }}">다음</a>
-            </li>
-            {% endif %}
-        <!-- // 다음 페이지 -->
-        </ul>
+            <!-- 추가된 CSS -->
+            <style>
+                .pagination .page-link {
+                    background-color: white; /* 기본 배경색을 흰색으로 설정 */
+                    color: #172E55; /* 글자 색은 #172E55 */
+                    border-color: #172E55; /* 테두리 색은 #172E55 */
+                }
+            
+                .pagination .page-link:hover {
+                    background-color: #f1f1f1; /* hover 시 배경색을 밝은 회색으로 설정 */
+                    border-color: #0f1f39; /* hover 시 테두리 색을 다크 블루로 설정 */
+                }
+            
+                .pagination .page-item.active .page-link {
+                    background-color: #172E55; /* 현재 페이지의 배경색을 #172E55로 설정 */
+                    color: white; /* 현재 페이지의 글자 색을 흰색으로 설정 */
+                    border-color: #172E55; /* 현재 페이지의 테두리 색을 #172E55로 설정 */
+                }
+            </style>
+                     
         </nav>
         <!-- // 페이지네이션 -->
     </div>

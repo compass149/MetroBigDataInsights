@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,4 +27,7 @@ urlpatterns = [
     path('comments/', include('comments.urls')),
     path('users/', include('users.urls')),
     path('intro/', include('intro.urls')),
+    
+     # 빈 URL일 때 /intro로 리디렉트
+    path('', lambda request: redirect('/intro/', permanent=True)),
 ]
