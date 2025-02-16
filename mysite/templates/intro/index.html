@@ -5,64 +5,53 @@
 
 {% block content %}
 <div class="container" style="padding: 30px; max-width: 1000px; margin: 0 auto;">
-
+    <h2 style="text-align: center; font-size: 2.5em; color: #333; margin-bottom: 30px;">프로젝트 소개</h2>
     <!-- 프로젝트 소개 카드 -->
     <div class="card mb-5" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         <div class="card-body">
-            <h1 class="card-title" style="font-size: 2.5em; color: #333; margin-bottom: 20px;">프로젝트 소개</h1>
+            
             <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                {{ description }}
+                서울 지하철은 출퇴근 시간대에 많은 이용객이 몰려 혼잡도가 높아지는 경우가 많다. 
+                본 연구의 초반 목표는 서울 지하철 혼잡도를 분석하여 주요 혼잡역과 시간대를 파악하는 것이었다.
             </p>
+            
             <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                서울교통공사의 지하철 혼잡도 정보, 서울시 용도지역 현황 통계, 서울시 생활인구 및 관내 이동 데이터를 중심으로 다양한 데이터를 활용하여
-                서울 지하철 혼잡 패턴을 보다 입체적으로 분석하는 것을 목표로 한다.
-                단순히 특정 시간대의 혼잡도를 확인하는 것이 아니라, 지역적, 사회적, 생활 인구적 요인이 혼잡도 증가에 영향을 미치는지를 심층적으로 분석하고자 한다.
+                그러나 데이터를 분석하는 과정에서 <strong>일부 역에서 예상과 다르게 유독 높은 혼잡도를 보이는 이상치(Outlier)가 발견되었다.</strong>
+                이들 지역에서 <strong>재개발 및 재건축이</strong> 이루어지고 있음을 확인했으며, 
+                지하철 혼잡도가 역의 위치나 환승 유무뿐만 아니라 <strong>재개발 및 재건축에 의한 인구 유입과도 밀접하게 관련이 있음을</strong> 발견했다.
             </p>
+
             <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                이를 위해 다음과 같은 핵심 연구 질문을 설정하였다.
+                따라서 본 연구는 서울 지하철 혼잡도를 분석하여 이상치를 탐색하고, 이를 통해 재개발이 지하철 혼잡도에 미치는 영향을 규명하려고 한다.
             </p>
+            
+            <hr>
+
+            <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
+                이를 위해 다음과 같은 <strong>핵심 연구 질문을 설정했다:</strong>
+            </p>
+
             <ol style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                <li>서울 지하철의 혼잡도는 시간대별·역별로 어떤 차이를 보이는가?</li>
-                <li>서울시 용도지역(상업지역, 주거지역, 업무지역 등)에 따라 혼잡도 차이가 발생하는가?</li>
-                <li>각 지하철역의 시간대별 혼잡도에 특이점은 무엇인가?</li>
+                <li>서울 지하철의 혼잡도는 <strong>시간대별·역별로</strong> 어떤 차이를 보이는가?</li>
+                <li>서울시 <strong>용도지역</strong>(상업지역, 주거지역, 업무지역 등)에 따라 혼잡도 차이가 발생하는가?</li>
+                <li>각 지하철역 <strong>시간대별 혼잡도의 특이점은</strong> 무엇인가?</li>
             </ol>
+
+            <hr>
+
             <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                본 연구는 위 질문들을 해결하기 위해 지하철 혼잡도 데이터와 서울시 생활권 데이터를 융합하여, 
-                시간대·공간적 차원에서 지하철 이용 행태의 패턴을 분석했다. 
-                이를 통해, 특정 지역의 지하철 이용이 증가하는 원인을 밝히고, 
-                대중교통 운영 효율성을 높이는 방안을 데이터 기반으로 도출하는 데 초점을 맞출 것이다.
+                본 연구는 위 질문들을 해결하기 위해 <strong>지하철 혼잡도 데이터와 서울시 생활권 데이터를 융합</strong>하여, 
+                시간대와 공간적 차원에서 지하철 이용 행태의 패턴을 분석했다. 
+                기존의 연구들은 일부 특정 시간대나 노선 중심으로 이루어진 경우가 많았고, 
+                생활인구, 관내 이동, 지역별 특성 등과의 종합적인 연관성을 고려한 연구는 제한적이었다.
             </p>
+
+            <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
+                따라서, 보다 정교한 정책 수립과 지하철 운영 최적화를 위해서는 
+                서울 지하철의 혼잡도를 다양한 도시 데이터와 연계하여 심층적으로 분석할 필요가 있다.
+            </p>
+
         </div>
     </div>
-
-    <!-- 연구 배경 카드 -->
-    <div class="card" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <div class="card-body">
-            <h1 class="card-title" style="font-size: 2.5em; color: #333; margin-bottom: 20px;">연구 배경</h1>
-            <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                {{ description }}
-            </p>
-            <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                서울은 대한민국의 경제, 문화, 정치 중심지로, 하루 평균 수백만 명이 이동하는 대도시이다. 
-                이러한 높은 인구 밀집도 속에서 대중교통, 특히 지하철은 시민들의 필수적인 이동 수단으로 자리 잡고 있다. 
-                하지만 매일 아침저녁 출퇴근 시간대마다 지하철 혼잡 문제는 반복되고 있으며, 
-                일부 구간에서는 탑승이 어려울 정도로 극심한 밀집이 발생한다.
-            </p>
-            <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                지하철 혼잡은 단순히 불편함을 넘어, 시민들의 이동 효율성과 삶의 질 저하, 대중교통 운영 부담 증가 등 여러 문제를 야기한다.
-                특히, 출퇴근 시 장시간의 밀집 환경에 노출되면 피로와 스트레스가 가중되며, 생산성 저하 및 대중교통 이용 기피 현상으로 이어질 가능성이 높다. 
-                이는 장기적으로 대중교통 이용률 감소, 교통 혼잡 심화 등의 악순환을 초래할 수 있다.
-            </p>
-            <p style="font-size: 1.2em; color: #444; line-height: 1.6; text-align: justify;">
-                서울시와 서울교통공사는 지하철 혼잡 완화를 위해 다양한 대책을 시행하고 있으나, 
-                현재의 해결책이 실제 데이터와 정확한 분석을 기반으로 충분히 반영되고 있는지에 대한 논의는 부족한 상황이다. 
-                기존의 혼잡도 관련 연구들은 일부 특정 시간대나 노선 중심으로 이루어지는 경우가 많아, 
-                생활인구, 관내 이동, 지역별 특성 등과의 종합적인 연관성을 고려한 연구는 제한적이었다. 
-                따라서, 보다 정교한 정책 수립과 지하철 운영 최적화를 위해서는 서울 지하철의 혼잡도를 
-                다양한 도시 데이터와 연계하여 심층적으로 분석할 필요가 있다.
-            </p>
-        </div>
-    </div>
-
 </div>
 {% endblock %}

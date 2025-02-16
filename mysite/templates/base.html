@@ -118,7 +118,12 @@
                         <a href="{% url 'intro:data_source' %}" 
                            class="list-group-item list-group-item-action"
                            style="{% if request.path == '/intro/data_source/' %}background-color: rgba(91, 179, 216, 0.58);{% endif %}">
-                            데이터 설명
+                            활용한 분석기법 및 데이터
+                        </a>
+                        <a href="{% url 'intro:data_processing' %}" 
+                           class="list-group-item list-group-item-action"
+                           style="{% if request.path == '/intro/data_processing/' %}background-color: rgba(91, 179, 216, 0.58);{% endif %}">
+                            데이터 가공 및 처리 과정
                         </a>
                         <a href="{% url 'intro:chart' %}" 
                            class="list-group-item list-group-item-action"

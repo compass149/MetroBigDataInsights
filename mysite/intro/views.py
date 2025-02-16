@@ -9,6 +9,9 @@ def member(request):
 def data_source(request):
     return render(request, 'intro/data_source.html',{'page_title': '활용 데이터'})
 
+def data_processing(request):
+    return render(request, 'intro/data_processing.html',{'page_title': '데이터 가공 및 처리 과정'})
+
 def chart(request):
     return render(request, 'intro/chart.html',{'page_title': '지하철 혼잡도 차트'})
 
