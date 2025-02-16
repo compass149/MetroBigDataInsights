@@ -2,38 +2,32 @@
 {% load static %}
 
 {% block content %}
-    <h2>활용 데이터</h2>
-    <div class="content-container">
-        <p><span class="highlight">데이터명 (출처, 최종수정일) / 링크</span></p>
+    <h2 style="text-align: center; font-size: 2.5em; color: #333; margin-bottom: 30px;">활용 데이터</h2>
+    <div class="content-container" style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 900px; margin: 0 auto;">
+        <p style="font-size: 1.3em; color: #444; line-height: 1.6; margin-bottom: 20px;">
+            <span style="font-weight: bold; color: #2e6da4;">데이터명 (출처, 최종수정일)</span> / 클릭하면 해당 데이터로 이동할 수 있습니다.
+        </p>
         
-        <p class="section-title">1. 서울교통공사 지하철혼잡도정보 (서울 열린데이터 광장, 2024.11.04)</p>
-        <p><a href="https://data.seoul.go.kr/dataList/OA-12928/F/1/datasetView.do" target="_blank">https://data.seoul.go.kr/dataList/OA-12928/F/1/datasetView.do</a></p>
-       
-        <p class="section-title">2. 서울시 지하철 호선별 역별 시간대별 승하차 인원 정보 (서울 열린데이터 광장, 2025.02.06)</p>
-        <p><a href="https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do" target="_blank">https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do</a></p>
-        
-        <p class="section-title">3. 서울교통공사_1_8호선 역사 좌표(위경도) 정보 (공공데이터포털, 2024.11.29)</p>
-        <p><a href="https://www.data.go.kr/data/15099316/fileData.do?recommendDataYn=Y" target="_blank">https://www.data.go.kr/data/15099316/fileData.do?recommendDataYn=Y</a></p>
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://data.seoul.go.kr/dataList/OA-12928/F/1/datasetView.do" target="_blank" style=" text-decoration: none;">1. 서울교통공사 지하철혼잡도정보 (서울 열린데이터 광장, 2024.11.04)</a></p>
 
-        <p class="section-title">4. 서울교통공사 역주소 및 전화번호 (서울 열린데이터 광장, 2024.11.04)</p>
-        <p><a href="https://data.seoul.go.kr/dataList/OA-12035/S/1/datasetView.do" target="_blank">https://data.seoul.go.kr/dataList/OA-12035/S/1/datasetView.do</a></p>
-        
-        <p class="section-title">5. 서울교통공사_1_8호선 역사 좌표(위경도) 정보 (공공데이터포털, 2024.12.06)</p>
-        <p><a href="https://www.data.go.kr/data/15099316/fileData.do?recommendDataYn=Y" target="_blank">https://www.data.go.kr/data/15099316/fileData.do?recommendDataYn=Y</a></p>
-       <hr>
-        <p class="section-title">6. 법정동 코드 (행정표준코드 관리시스템, 상시 업데이트)</p>
-        <p><a href="https://www.code.go.kr/stdcode/regCodeL.do" target="_blank">https://www.code.go.kr/stdcode/regCodeL.do</a></p>
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://data.seoul.go.kr/dataList/OA-12252/S/1/datasetView.do" target="_blank" style="color: #333333; text-decoration: none;">2. 서울시 지하철 호선별 역별 시간대별 승하차 인원 정보 (서울 열린데이터 광장, 2025.02.06)</a></p>
 
-        <p class="section-title">7. 서울시 용도지역 현황 통계 (서울 열린데이터 광장, 2021.10.21)</p>
-        <p><a href="https://data.seoul.go.kr/dataList/244/S/2/datasetView.do" target="_blank">https://data.seoul.go.kr/dataList/244/S/2/datasetView.do</a></p>
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://www.data.go.kr/data/15099316/fileData.do?recommendDataYn=Y" target="_blank" style="color: #333333; text-decoration: none;">3. 서울교통공사_1_8호선 역사 좌표(위경도) 정보 (공공데이터포털, 2024.11.29)</a></p>
 
-        <p class="section-title">8. 서울시 건설 정비사업 추진 경과 정보 (서울 열린데이터 광장, 2024.02.27)</p>
-        <p><a href="https://data.seoul.go.kr/dataList/OA-2254/S/1/datasetView.do" target="_blank">https://data.seoul.go.kr/dataList/OA-2254/S/1/datasetView.do</a></p>
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://data.seoul.go.kr/dataList/OA-12035/S/1/datasetView.do" target="_blank" style="color: #333333; text-decoration: none;">4. 서울교통공사 역주소 및 전화번호 (서울 열린데이터 광장, 2024.11.04)</a></p>
 
-        <p class="section-title">9. 서울시 재개발 재건축 정비사업 현황 (서울 열린데이터 광장, 2025.02.16)</p>
-        <p><a href="https://https://data.seoul.go.kr/dataList/OA-2253/S/1/datasetView.do" target="_blank">https://data.seoul.go.kr/dataList/OA-2253/S/1/datasetView.do</a></p>
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://www.data.go.kr/data/15099316/fileData.do?recommendDataYn=Y" target="_blank" style="color: #333333; text-decoration: none;">5. 서울교통공사_1_8호선 역사 좌표(위경도) 정보 (공공데이터포털, 2024.12.06)</a></p>
 
-        <p class="section-title">10. 서울특별시_공동주택 현황(세대수별) 통계 (공공데이터포털, 2021.05.06)</p>
-        <p><a href="https://www.data.go.kr/data/15047145/fileData.do" target="_blank">https://www.data.go.kr/data/15047145/fileData.do</a></p>
+        <hr style="border: 1px solid #333333; margin: 30px 0;">
+
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://www.code.go.kr/stdcode/regCodeL.do" target="_blank" style="color: #333333; text-decoration: none;">6. 법정동 코드 (행정표준코드 관리시스템, 상시 업데이트)</a></p>
+
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://data.seoul.go.kr/dataList/244/S/2/datasetView.do" target="_blank" style="color: #333333; text-decoration: none;">7. 서울시 용도지역 현황 통계 (서울 열린데이터 광장, 2021.10.21)</a></p>
+
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://data.seoul.go.kr/dataList/OA-2254/S/1/datasetView.do" target="_blank" style="color: #333333; text-decoration: none;">8. 서울시 건설 정비사업 추진 경과 정보 (서울 열린데이터 광장, 2024.02.27)</a></p>
+
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://data.seoul.go.kr/dataList/OA-2253/S/1/datasetView.do" target="_blank" style="color: #333333; text-decoration: none;">9. 서울시 재개발 재건축 정비사업 현황 (서울 열린데이터 광장, 2025.02.16)</a></p>
+
+        <p class="section-title" style="font-size: 1.2em; font-weight: bold; margin-bottom: 15px;"><a href="https://www.data.go.kr/data/15047145/fileData.do" target="_blank" style="color: #333333; text-decoration: none;">10. 서울특별시_공동주택 현황(세대수별) 통계 (공공데이터포털, 2021.05.06)</a></p>
     </div>
 {% endblock %}

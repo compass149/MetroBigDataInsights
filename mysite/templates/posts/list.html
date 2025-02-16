@@ -43,7 +43,11 @@
                 {% for post in posts %}
                     <tr>
                         <td class="text-center">{{ forloop.counter }}</td>
-                        <td><a href="{% url 'posts:read' post_id=post.id %}">{{ post.title }}</a></td>
+                        <td style="text-align: center;">
+                            <a href="{% url 'posts:read' post_id=post.id %}" style="color: #333333; text-decoration: none; display: inline-block;">
+                                {{ post.title }}
+                            </a>
+                        </td>
                         <td class="text-center">{{ post.created_by.first_name }}</td>
                         <td class="text-center">{{ post.created_at | date:"Y-m-d H:i" }}</td>
                         <td class="text-center">{{ post.updated_at | date:"Y-m-d H:i" }}</td>

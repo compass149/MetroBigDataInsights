@@ -41,16 +41,16 @@ h2 {
   font-size: 1.2em;
   color: #444;
   line-height: 1.6;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .content-container .highlight {
   font-weight: bold;
-  color: #2e6da4;
+  color: #333333;
 }
 
 .content-container a {
-  color: #2e6da4;
+  color: #333333;
   text-decoration: none;
 }
 
@@ -63,6 +63,8 @@ h2 {
   color: #333333;
   font-size: 1.3em;
   margin-top: 20px;
+  margin-bottom: 0 !important;
+  text-decoration: none;
 }
 
   
