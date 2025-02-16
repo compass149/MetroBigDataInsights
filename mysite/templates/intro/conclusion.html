@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2 style="text-align: center; font-size: 2.5em; color: #333; margin-bottom: 30px;">결론 및 제언</h2>
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 900px; margin: 0 auto;">
+        <p style="font-size: 1.2em; color: #444; line-height: 1.6; margin-bottom: 20px;">
+            본 프로젝트에서는 <span style="font-weight: bold; color: #2e6da4;">지하철 혼잡도와 아파트 재개발이 관련이 있다는 사실</span>을 발견했다.
+        </p>
+        <p style="font-size: 1.2em; color: #444; line-height: 1.6; margin-bottom: 20px;">
+            현재까지의 데이터로 볼 때, 재개발 완료 지역은 <span style="font-weight: bold; color: #2e6da4;">마천역, 방화역, 신정네거리역</span> 이렇게 3곳에 불과하여 직접적인 영향 분석이 어렵다. 
+            하지만, 대부분의 높은 혼잡도를 보이는 역들이 재개발 지역이거나 예정지임을 고려할 때, 재개발과 출근 시간대 혼잡도 증가 간의 <span style="font-weight: bold; color: #2e6da4;">연관성이 있을 가능성이 크다</span>.
+        </p>
+        <p style="font-size: 1.2em; color: #444; line-height: 1.6; margin-bottom: 20px;">
+            특히, 평균 혼잡도와 출근 시간대 혼잡도의 차이가 가장 큰 곳은 <span style="font-weight: bold; color: #2e6da4;">마천역과 암사역</span>이다.
+        </p>
+        <p style="font-size: 1.2em; color: #444; line-height: 1.6; margin-bottom: 20px;">
+            아파트 재개발은 주거지 확충을 의미하며, 이는 해당 지역의 출근 시간대 지하철 혼잡도 증가를 초래하는 주요 요인으로 작용할 수 있다. 또한, 2 ~ 3년 사이에 생긴 대단지 아파트가 있는 곳에서 지하철 혼잡도가 높다는 점을 확인했다.
+        </p>
+        <p style="font-size: 1.2em; color: #444; line-height: 1.6; margin-bottom: 20px;">
+            따라서, 현재 진행 중인 재개발, 재건축이 완료되거나 앞으로 이루어질 재개발, 재건축에 따라 지하철 혼잡도가 더욱 증가할 가능성을 배제할 수 없다.
+        </p>
+        <p style="font-size: 1.3em; font-weight: bold; color: #2e6da4; margin-top: 30px;">
+            교통 분산 정책 제언
+        </p>
+        <p style="font-size: 1.2em; color: #444; line-height: 1.6;">
+            이에 따라, 이러한 지역에서는 교통 분산 정책을 수립할 필요성이 있음을 시사한다.
+        </p>
+    </div>
+{% endblock %}

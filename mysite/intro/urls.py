@@ -7,4 +7,5 @@ urlpatterns = [
     path('member/', views.member, name='member'),  # 팀원 소개 페이지
     path('data_source/', views.data_source, name='data_source'),  # 데이터 소개 페이지
     path('chart/', views.chart, name='chart'),  # 데이터 소개 페이지
+    path('conclusion/', views.conclusion, name='conclusion'),  # 데이터 소개 페이지
 ]

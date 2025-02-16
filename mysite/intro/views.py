@@ -11,3 +11,6 @@ def data_source(request):
 
 def chart(request):
     return render(request, 'intro/chart.html',{'page_title': '지하철 혼잡도 차트'})
+
+def conclusion(request):
+    return render(request, 'intro/conclusion.html',{'page_title': '결론'})

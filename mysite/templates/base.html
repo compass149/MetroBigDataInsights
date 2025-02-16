@@ -125,6 +125,11 @@
                            style="{% if request.path == '/intro/chart/' %}background-color: rgba(91, 179, 216, 0.58);{% endif %}">
                             지하철 혼잡도 차트
                         </a>
+                        <a href="{% url 'intro:conclusion' %}" 
+                           class="list-group-item list-group-item-action"
+                           style="{% if request.path == '/intro/conclusion/' %}background-color: rgba(91, 179, 216, 0.58);{% endif %}">
+                            결론
+                        </a>
                         <a href="{% url 'posts:list' %}" 
                            class="list-group-item list-group-item-action"
                            style="{% if request.path == '/posts/list/' %}background-color: rgba(91, 179, 216, 0.58);{% endif %}">
