@@ -6,58 +6,50 @@
 
 {% block content %}
     <div class="container">
-        <h2 class="my-4">차트 페이지</h2>
-        <div class="row">
-           
-    <div class='tableauPlaceholder' id='viz1739695425427' style='position: relative'>
-        <noscript><a href='#'><img alt='대시보드 1 '
-             src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2024_17396952187670&#47;1_1&#47;1_rss.png' style='border: none' /></a>
-            </noscript><object class='tableauViz'  style='display:none;'>
-                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-                <param name='embed_code_version' value='3' /> <param name='site_root' value='' />
-                <param name='name' value='2024_17396952187670&#47;1_1' /><param name='tabs' value='no' />
-                <param name='toolbar' value='yes' />
-                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;20&#47;2024_17396952187670&#47;1_1&#47;1.png' />
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
-                <param name='language' value='ko-KR' /></object>
-                </div>               
-                <script type='text/javascript'>
-                    var divElement = document.getElementById('viz1739695425427');      
-                    var vizElement = divElement.getElementsByTagName('object')[0]; 
-                    if ( divElement.offsetWidth > 800 ) { 
-                        vizElement.style.minWidth='420px';
-                        vizElement.style.maxWidth='650px';
-                        vizElement.style.width='100%';
-                        vizElement.style.minHeight='587px';
-                        vizElement.style.maxHeight='887px';
-                        vizElement.style.height=(divElement.offsetWidth*1.2)+'px';}  <!-- 여기서 비율을 1.2로 수정 -->
-                    else if ( divElement.offsetWidth > 500 ) { 
-                        vizElement.style.minWidth='420px';
-                        vizElement.style.maxWidth='650px';
-                        vizElement.style.width='100%';
-                        vizElement.style.minHeight='587px';
-                        vizElement.style.maxHeight='887px';
-                        vizElement.style.height=(divElement.offsetWidth*1.2)+'px';} <!-- 여기서 비율을 1.2로 수정 -->
-                    else { 
-                        vizElement.style.width='100%';
-                        vizElement.style.height='1200px';} <!-- 여기서 세로 길이를 1200px로 설정 -->
-                    
-                    var scriptElement = document.createElement('script');                    
-                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
-                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-                </script>
-                
-                <div class="tableauPlaceholder" id="viz1739702168730" style="position: relative;">
+        <h2 class="my-4 text-center">차트 및 설명</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <!-- 요일, 상하구분, 분기 혼잡도 차트 -->
+
+                <div class='tableauPlaceholder' id='viz1739695425427' style='position: relative; margin: 0 auto;'>
+                    <noscript>
+                        <a href='#'>
+                            <img alt='대시보드 1' src='https://public.tableau.com/static/images/20/2024_17396952187670/1_1/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    <object class='tableauViz' style='display:none; width: 100%;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='2024_17396952187670/1_1' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/20/2024_17396952187670/1_1/1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='ko-KR' />
+                    </object>
+                </div>
+                <ul class="mt-2" style="margin-bottom:30px;">
+                    <li>평일 > 토요일 > 일요일 순으로 지하철 혼잡도가 높다.</li>
+                    <li>분기별로는 큰 차이가 나지 않는다.</li>
+                    <li>상선(上線, Up Line): 기본적으로 "상행선"을 의미하며, 노선의 기준이 되는 종착역 방향으로 가는 선로입니다.</li>
+                    <li>하선(下線, Down Line): 기본적으로 "하행선"을 의미하며, 기준이 되는 역에서 반대 방향으로 가는 선로입니다.</li>
+                    <li>내선(內線, Inner Track): 순환선에서 안쪽 선로를 의미(시계방향)</li>
+                    <li>외선(外線, Outer Track): 순환선에서 바깥쪽 선로를 의미(반시계방향)</li>
+                </ul>
+                <hr>
+                <!-- 평일 혼잡도 평균, 최대 차트 -->
+                <div class="tableauPlaceholder" id="viz1739702168730" style="position: relative; margin-top: 30px; margin: 0 auto;">
                     <noscript>
                         <a href="#">
                             <img alt="대시보드 1" src="https://public.tableau.com/static/images/5/5_17397021499700/1_2/1_rss.png" style="border: none;" />
                         </a>
                     </noscript>
-                    <object class="tableauViz" style="display:none;">
+                    <object class="tableauViz" style="display:none; width: 100%;">
                         <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
                         <param name="embed_code_version" value="3" />
                         <param name="site_root" value="" />
@@ -71,42 +63,93 @@
                         <param name="display_overlay" value="yes" />
                         <param name="display_count" value="yes" />
                         <param name="language" value="ko-KR" />
-                        <param name="filter" value="publish=yes" />
                     </object>
+                  
+                    
                 </div>
-                <script type="text/javascript">
-                    var divElement = document.getElementById('viz1739702168730');
-                    var vizElement = divElement.getElementsByTagName('object')[0];
-                    if (divElement.offsetWidth > 800) {
-                        vizElement.style.minWidth = '420px';
-                        vizElement.style.maxWidth = '650px';
-                        vizElement.style.width = '100%';
-                        vizElement.style.minHeight = '587px';
-                        vizElement.style.maxHeight = '887px';
-                        vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
-                    } else if (divElement.offsetWidth > 500) {
-                        vizElement.style.minWidth = '420px';
-                        vizElement.style.maxWidth = '650px';
-                        vizElement.style.width = '100%';
-                        vizElement.style.minHeight = '587px';
-                        vizElement.style.maxHeight = '887px';
-                        vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
-                    } else {
-                        vizElement.style.width = '100%';
-                        vizElement.style.height = '827px';
-                    }
-                    var scriptElement = document.createElement('script');
-                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                    <ul class="mt-2" style="margin-bottom:30px;">
+                        <li>출퇴근 시간에 지하철 혼잡도 합계, 평균, 최댓값이 높다.</li>
+                    </ul>
+                    <hr>
+                <div class='tableauPlaceholder' id='viz1739849459817' style='position: relative; margin: 0 auto;'>
+                    <noscript><a href='#'>
+                        <img alt='스토리 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;GW&#47;GWZPXYD6Z&#47;1_rss.png' 
+                        style='border: none' /></a></noscript><object class='tableauViz'  style='display:none; width: 100%;'>
+                            <param name='host_url' 
+                            value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> 
+                            <param name='path' value='shared&#47;GWZPXYD6Z' /> <param name='toolbar' value='yes' />
+                            <param name='static_image' value='https:&#47;&#47;
+                            public.tableau.com&#47;static&#47;images&#47;GW&#47;GWZPXYD6Z&#47;1.png' /> 
+                            <param name='animate_transition' value='yes' />
+                            <param name='display_static_image' value='yes' />
+                            <param name='display_spinner' value='yes' />
+                            <param name='display_overlay' value='yes' />
+                            <param name='display_count' value='yes' />
+                            <param name='language' value='ko-KR' />
+                            <param name='filter' value='publish=yes' />
+                        </object></div>                
+                            <script type='text/javascript'>                    
+                                var divElement = document.getElementById('viz1739849459817');                    
+                                var vizElement = divElement.getElementsByTagName('object')[0];                    
+                                vizElement.style.width='100%';vizElement.style.height='991px';                    
+                                var scriptElement = document.createElement('script');                    
+                                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
                 </script>
-                
-                <div class="tableauPlaceholder" id="viz1739702258303" style="position: relative;">
+                <ul class="mt-2" style="margin-bottom:30px;">
+                    <li>지하철역들의 전체 평균 혼잡도, 전체 혼잡도 합계, 전체 혼잡도 최댓값, 주말 평균 혼잡도 최댓값, 평일 평균 혼잡도 최댓값 현황  .</li>
+                </ul>
+                <hr>
+            </div>
+
+                <!-- 용도 비율 차트 -->
+                <div class='tableauPlaceholder' id='viz1739846689311' style='align:center; margin: 0 auto;'>
+                    <noscript>
+                        <a href='#'>
+                            <img alt='스토리 1 ' 
+                    src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;_1&#47;_17398466719020&#47;1_2&#47;1_rss.png' 
+                    style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz'  style='display:none; width: 100%;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                <param name='embed_code_version' value='3' /> <param name='site_root' value='' />
+                <param name='name' value='_17398466719020&#47;1_2' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;_1&#47;
+                _17398466719020&#47;1_2&#47;1.png' /> 
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='ko-KR' />
+                <param name='filter' value='publish=yes' />
+            </object>
+                </div>                
+                    <script type='text/javascript'>                    
+                        var divElement = document.getElementById('viz1739846689311');                   
+                        var vizElement = divElement.getElementsByTagName('object')[0];                    
+                        vizElement.style.width='100%';vizElement.style.height='991px';                    
+                        var scriptElement = document.createElement('script');                    
+                        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                        vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                    </script>
+                    <ul class="mt-2" style="margin-bottom:30px;">
+                        <li>서울특별시 지역구별 용도 지역 차트이다.</li>
+                        <li>각 용도를 100%로 두고, 해당 자치구의 용도가 차지하는 비율을 나타냈다.</li>
+                        <li>예) 서울시 전체 주거 비율 중 송파구의 주거 비율 = 6.576%</li>
+                    </ul>
+
+                <!-- 타겟역 세대 수 변화-->
+                <div class="tableauPlaceholder" id="viz1739702258303" style="position: relative;  margin-top: 30px; margin: 0 auto;">
                     <noscript>
                         <a href="#">
                             <img alt="타겟팅 세대수 변화" src="https://public.tableau.com/static/images/5/5_17397021499700/2_2/1_rss.png" style="border: none;" />
                         </a>
                     </noscript>
-                    <object class="tableauViz" style="display:none;">
+                    <object class="tableauViz" style="display:none; width: 100%;">
                         <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
                         <param name="embed_code_version" value="3" />
                         <param name="site_root" value="" />
@@ -120,26 +163,20 @@
                         <param name="display_overlay" value="yes" />
                         <param name="display_count" value="yes" />
                         <param name="language" value="ko-KR" />
-                        <param name="filter" value="publish=yes" />
                     </object>
                 </div>
-                <script type="text/javascript">
-                    var divElement = document.getElementById('viz1739702258303');
-                    var vizElement = divElement.getElementsByTagName('object')[0];
-                    vizElement.style.width = '1016px';
-                    vizElement.style.height = '991px';
-                    var scriptElement = document.createElement('script');
-                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
-                </script>
-                
-                <div class="tableauPlaceholder" id="viz1739702338688" style="position: relative;">
+                <p class="mt-2"></p>
+                <ul class="mt-2" style="margin-bottom:30px;">
+                    <li>타겟역(거여, 마천, 방화, 봉화산, 신정네거리, 영천구청)이 속한 곳의 세대수 변화</li>
+                </ul>
+                <!-- 네 번째 차트 -->
+                <div class="tableauPlaceholder" id="viz1739702338688" style="position: relative;  margin-top: 30px; margin: 0 auto;">
                     <noscript>
                         <a href="#">
                             <img alt="특이점 발견" src="https://public.tableau.com/static/images/1/1_17397023165740/2/1_rss.png" style="border: none;" />
                         </a>
                     </noscript>
-                    <object class="tableauViz" style="display:none;">
+                    <object class="tableauViz" style="display:none; width: 100%;">
                         <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
                         <param name="embed_code_version" value="3" />
                         <param name="site_root" value="" />
@@ -153,39 +190,63 @@
                         <param name="display_overlay" value="yes" />
                         <param name="display_count" value="yes" />
                         <param name="language" value="ko-KR" />
-                        <param name="filter" value="publish=yes" />
                     </object>
                 </div>
-                <script type="text/javascript">
-                    var divElement = document.getElementById('viz1739702338688');
-                    var vizElement = divElement.getElementsByTagName('object')[0];
-                    vizElement.style.width = '1016px';
-                    vizElement.style.height = '991px';
-                    var scriptElement = document.createElement('script');
-                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                <ul class="mt-2" style="margin-bottom:30px;">
+                    <li>출근 시간대(05~09)혼잡도 / 전체 평균 혼잡도 비율이 가장 높은 역 순서를 보았다.</li>
+                    <li>서울에 위치하면서 환승역이 아닌 역을 기준으로 하면 마천역이 가장 높다.</li>
+                </ul>
+                <div class='tableauPlaceholder' id='viz1739847901494' style='position: relative; margin: 0 auto;'>
+                    <noscript><a href='#'><img alt='재개발현황&#47;일자 ' src='https:&#47;&#47;
+                        public.tableau.com&#47;static&#47;images&#47;5_&#47;5_17397021499700&#47;3_2&#47;1_rss.png' 
+                        style='border: none' />
+                    </a></noscript><object class='tableauViz'  style='display:none; width: 100%;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> <param name='site_root' value='' />
+                        <param name='name' value='5_17397021499700&#47;3_2' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https:&#47;&#47;
+                        public.tableau.com&#47;static&#47;images&#47;5_&#47;5_17397021499700&#47;3_2&#47;1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='ko-KR' />
+                    </object></div>                
+                    <script type='text/javascript'>                    
+                        var divElement = document.getElementById('viz1739847901494');                    
+                        var vizElement = divElement.getElementsByTagName('object')[0];                    
+                        vizElement.style.width='100%';vizElement.style.height='991px';                    
+                        var scriptElement = document.createElement('script');                    
+                        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
                 </script>
-    <div class='tableauPlaceholder' id='viz1739702406226' style='position: relative'><noscript><a href='#'>
-        <img alt='재개발현황&#47;일자 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;5_&#47;5_17397021499700&#47;3_2&#47;
-        1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'>
-            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-            <param name='embed_code_version' value='3' /> 
-            <param name='site_root' value='' />
-            <param name='name' value='5_17397021499700&#47;3_2' />
-            <param name='tabs' value='no' /><param name='toolbar' value='yes' />
-            <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;5_&#47;5_17397021499700&#47;
-            3_2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' />
-            <param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' />
-            <param name='language' value='ko-KR' /><param name='filter' value='publish=yes' />
-        </object>
-    </div>                
-    <script type='text/javascript'>                    
-        var divElement = document.getElementById('viz1739702406226');                   
-         var vizElement = divElement.getElementsByTagName('object')[0];                    
-         vizElement.style.width='1016px';vizElement.style.height='991px';                    
-         var scriptElement = document.createElement('script');                    
-         scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                   
-          vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-        </script>
-    {% endblock %}
+                <ul class="mt-2" style="margin-bottom:30px;">
+                    <li>타겟역이 속한 곳의 재개발 현황</li>
+                    <li>1000세대 이상인 곳이 많은 것을 알 수 있다.</li>
+                </ul>
+              
+        </div>
+    </div>
 
+    <script type="text/javascript">
+        // 차트 로드 자바스크립트
+        function loadViz(elementId) {
+            var divElement = document.getElementById(elementId);
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width = '100%';
+            vizElement.style.height = '600px';  // 원하는 높이로 수정
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        }
+
+        loadViz('viz1739695425427');
+        loadViz('viz1739702168730');
+        loadViz('viz1739702258303');
+        loadViz('viz1739702338688');
+        loadViz('viz1739702406226');
+    </script>
+{% endblock %}
